@@ -1,4 +1,11 @@
 app.controller('controller_home', function($scope,services,toastr) {
+  
+  services.post('home', 'carrousel_brand')
+  .then(function(response) {
+    console.log(response);
+  }, function(error) {
+      console.log(error);
+  });
 })
 
   // function loadSlider() {
