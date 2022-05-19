@@ -1,0 +1,11 @@
+<div class="form_email">
+   <img id="contact_image" src="/Proyecto_V.5-RafaFerri/frontend/view/img/logo_autoshell.png"/>
+   <br />
+   <input ng-model="email" placeholder="Email" autocomplete="off" id="email" name="email" type="text" ng-keyup="regex()" required/><i ng-show="error_email" style="color: red;margin-left: 10px;" class="fas fa-times-circle"></i>
+   <br />
+
+   <input ng-model="subject" id="matter" placeholder="Matter" type="text" ng-keyup="regex()" required/><i ng-show="error_subject" style="color: red;margin-left: 10px;" class="fas fa-times-circle"></i>
+   <br />
+   <textarea ng-model="message" ng-keyup="regex('event')" placeholder="Write your porpuse" maxlength="150" id="message" name="message" id="description" cols="50" rows="4" required ></textarea><span class="conter">{{cont}}</span><br />
+   <input ng-click="send_email()" type="button" value="Send"/> 
+</div>

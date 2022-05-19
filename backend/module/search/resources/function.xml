@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>tipo</name>
+        <uri>tipo</uri>
+    </function>
+    <function>
+        <name>categoria</name>
+        <uri>category</uri>
+    </function>
+    <function>
+        <name>autocompletar</name>
+        <uri>autocomplete</uri>
+    </function>
+</functions>

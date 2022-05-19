@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>view</name>
+        <uri>view</uri>
+    </function>
+    <function>
+        <name>filtros</name>
+        <uri>filters</uri>
+    </function>
+    <function>
+        <name>Coches</name>
+        <uri>charge_cars</uri>
+    </function>
+    <function>
+        <name>detalle_coche</name>
+        <uri>detail_car</uri>
+    </function>
+    <function>
+        <name>count</name>
+        <uri>count</uri>
+    </function>
+    <function>
+        <name>like</name>
+        <uri>like</uri>
+    </function>
+    <function>
+        <name>userlikes</name>
+        <uri>charge_all_likes</uri>
+    </function>
+    <function>
+        <name>redireccionamiento</name>
+        <uri>redirect</uri>
+    </function>
+</functions>
