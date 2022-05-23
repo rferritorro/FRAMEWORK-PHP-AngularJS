@@ -8,7 +8,16 @@ body{
   line-height: 15px;
   background-color: black;
 }
+.swiper {
+  width: 70%;
+  height: 300px;
+  margin-top: 5%;
+}
 
+.swiper img {
+  width: 300px;
+  height: 300px;
+}
 .page-container {
 	min-height: 100%; 
 	position: relative; 
@@ -274,44 +283,29 @@ span#user_login_close {
   position: absolute;
   right: 0%;
 }
+
 div#types_buttons {
-  width: auto;
-  height: auto;
-  position: relative;
-  right: -10%;
   display: inline-flex;
-  margin: 2%;
-}
-div#types_buttons div {
-  width: 40%;
-  text-align: center;
-  height: 30%;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
   margin: 5%;
 }
-div#types_buttons div:hover {
-border: 2px solid white;
- opacity: 0.2;
+div#types_buttons img,div#categories_buttons img {
+  width: 350px;
+  height: 300px;
 }
-
 div#categories_buttons {
-  width: auto;
-  height: auto;
-  position: relative;
-  right: -10%;
   display: inline-flex;
-  margin: 2%;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: 5%; 
 }
-#categories_buttons div {
-  width: 40%;
-  text-align: center;
-  height: 30%;
-  margin: 5%;
+.card {
+  margin: 0% 3%;
+  background-color: transparent;
 }
-#categories_buttons div:hover {
-border: 2px solid white;
- opacity: 0.2;
-}
-
 #all_shop {
   height: auto;
   width: 55%;

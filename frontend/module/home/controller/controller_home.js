@@ -1,12 +1,29 @@
-app.controller('controller_home', function($scope,services,toastr) {
+app.controller('controller_home', function($scope,BrandsCar,TypeCar,CategoriesCar) {
+
+  $scope.brands= BrandsCar;
+  $scope.types= TypeCar;
+  $scope.categories= CategoriesCar;
+
+  console.log($scope.types);
+  console.log($scope.categories);
   
-  services.post('home', 'carrousel_brand')
-  .then(function(response) {
-    console.log(response);
-  }, function(error) {
-      console.log(error);
-  });
+setTimeout(() => {  
+  new Swiper('.swiper', {
+      // Optional parameters
+      loop: true,
+      slidesPerView: 3,
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      // And if we need scrollbar
+    })
+  },0)
+
 })
+
+
+
 
   // function loadSlider() {
 //    ajaxPromise(friendlyURL('?page=home&op=carousel'),

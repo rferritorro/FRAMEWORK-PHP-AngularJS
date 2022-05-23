@@ -4,4 +4,12 @@
         <name>carrousel_brand</name>
         <uri>carrousel_brand</uri>
     </function>
+     <function>
+        <name>menu_types</name>
+        <uri>menu_types</uri>
+    </function>
+     <function>
+        <name>menu_categories</name>
+        <uri>menu_categories</uri>
+    </function>
 </functions>
