@@ -1,4 +1,5 @@
       <!-- Slider main container -->
+<h1>Brands which we work</h1>
 <div class="swiper">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
@@ -11,7 +12,7 @@
     <!-- If we need scrollbar -->
     <div class="swiper-scrollbar"></div>
   </div>
-
+<h1>Motor types</h1>
 <div id="types_buttons">
   <div class="card" ng-repeat="type in types" style="width: 18rem;">
     <img src="frontend/{{type.img}}" class="card-img-top">
@@ -21,6 +22,7 @@
     </div>
   </div>
 </div></br>
+<h1>Categories of Cars</h1>
 <div id="categories_buttons">
   <div class="card" ng-repeat="categorie in categories" style="width: 18rem;">
     <img src="frontend/{{categorie.img}}" class="card-img-top">
@@ -30,6 +32,12 @@
     </div>
   </div>
 </div>
+<h1>News about Cars</h1>
 <div id="news_home">
-
+<div ng-repeat="new in news" class="box-new">
+  <h2>{{new.title}}</h2>
+  <img src="{{new.image}}" />
+  <p>{{new.description}}</p>
+</div>
+<input type="button" ng-show="service_news_button"  ng-click="allnews()" value="More news">
 </div>
