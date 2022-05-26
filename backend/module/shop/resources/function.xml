@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>view</name>
-        <uri>view</uri>
+        <name>Coches</name>
+        <uri>charge_cars</uri>
     </function>
     <function>
         <name>filtros</name>
-        <uri>filters</uri>
+        <uri>charge_filters</uri>
     </function>
     <function>
-        <name>Coches</name>
-        <uri>charge_cars</uri>
+        <name>filtro_modelo</name>
+        <uri>model_filter</uri>
     </function>
     <function>
         <name>detalle_coche</name>

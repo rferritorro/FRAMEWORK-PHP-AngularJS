@@ -16,6 +16,10 @@
 			return self::$_instance;
 		}
 
+		public function get_cars_BLL($args) {
+			return $this -> dao -> select_data_cars($this->db,$args[0]);
+
+		}
 		public function get_filters_BLL() {
 
 			return $this -> dao -> select_data_filters($this->db);
@@ -25,10 +29,6 @@
 			return $this -> dao -> select_data_filter_model($this->db,$args[0]);
 		}
 
-        public function get_cars_BLL($args) {
-            return $this -> dao -> select_data_cars($this->db,$args[0]);
-
-        }
 
         public function get_filter_cars_BLL($args) {
             return $this -> dao -> select_filter_cars_cars($this->db,$args[0],$args[1]);

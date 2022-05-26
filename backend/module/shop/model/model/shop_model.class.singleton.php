@@ -14,16 +14,17 @@ class shop_model {
             return self::$_instance;
         }
 
+        public function get_cars($args) {
+            return $this -> bll -> get_cars_BLL($args);
+        }
         public function get_filters() {
             return $this -> bll -> get_filters_BLL();
         }
         public function get_filter_model($args) {
+           
             return $this -> bll -> get_filter_model_BLL($args);
         }
 
-        public function get_cars($args) {
-            return $this -> bll -> get_cars_BLL($args);
-        }
 
         public function get_filter_cars($args) {
             return $this -> bll -> get_filter_cars_BLL($args);

@@ -33,8 +33,7 @@
         
         }
         public function select_data_filter_model($db,$brand) {
-            
-            $sql = "SELECT m.id,m.model_car FROM model_cars m,brand_car b WHERE m.brand_car = b.id AND b.brand='$brand'";
+            $sql = "SELECT m.id,m.model_car FROM model_cars m WHERE m.brand_car='$brand'";
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }
@@ -44,7 +43,7 @@
             FROM cars c 
             INNER JOIN filter_bodywork f ON c.bodywork = f.id
             INNER JOIN ciudades cd ON c.city = cd.id
-            ORDER BY count DESC,c.brand_car ASC LIMIT $limit,5";
+            ORDER BY count DESC,c.brand_car ASC LIMIT $limit,6";
 
              $stmt = $db->ejecutar($sql);
              return $db->listar($stmt);

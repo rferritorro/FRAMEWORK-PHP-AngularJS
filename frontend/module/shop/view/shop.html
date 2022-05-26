@@ -1,0 +1,56 @@
+<div id="grup_order">
+</div>
+<div id="all_shop">
+  <nav class="pagination_part" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" ng-click="allcars(-1)" ng-show="pag_left" ><i class="fas fa-angle-double-left"></i></li>
+      <li class="page-item" ng-click="allcars(1)">1</li>
+      <li class="page-item" ng-click="allcars(2)">2</li>
+      <li class="page-item" ng-click="allcars(-2)" ng-show="pag_right"><i class="fas fa-angle-double-right"></i></li>
+    </ul>
+  </nav>
+        <div class="card" ng-repeat="car in cars" style="width: 18rem;">
+            <img src="frontend/{{car.img}}" class="card-img-top">
+            <div class="card-body">
+              <h2 class="card-title">{{car.brand_car}}  {{car.model_car}}</h2>
+              <h3>{{car.kilometres}} km</h3>
+              <h3>{{car.price}} €</h3>
+              <i id={{car.id}} class="fas fa-eye btn btn-dark"></i>
+              <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
+            </div>
+        </div>
+</div>
+<div id="one_product" hidden>
+</div>
+<div id="filters">
+  <h1>Marca</h1>
+    <select ng-model="brands" ng-change="dropdown(brands.id)" ng-options="brand.brand for brand in filters[0]">
+    </select>
+  <h1>Modelo</h1>
+    <select ng-model="model_data" ng-options="model.model_car for model in modelo">
+    </select>
+  <h1>Precio</h1>
+    <div>
+      <input type="number">
+      <input type="number">
+    </div>
+  <h1>Tipo</h1>
+    <select>
+      <option value="0">--</option>
+      <option ng-repeat="type in filters[1]" value="{{type.id}}">{{type.nom}}</option>
+    </select>
+  <h1>Categoria</h1>
+    <select>
+      <option value="0">--</option>
+      <option ng-repeat="categorie in filters[2]" value="{{categorie.id}}">{{categorie.nom}}</option>
+    </select>
+  <h1>Carroceria</h1>
+    <div class="bodywork">
+      <img ng-style="myStyle" id="{{bodywork.id}}" ng-click="change_opacity({{bodywork.id}})" ng-repeat="bodywork in filters[3]" class="img_bodywork_2" value="{{bodywork.id}}" src="frontend/{{bodywork.bodywork}}"/>
+    </div>
+</div>
+
+<div id="map_cars">
+  <angular-mapbox-map zoom="map.zoom" center="map.center" design="'mapbox://styles/mapbox/dark-v9'">
+  </angular-mapbox-map>
+</div>

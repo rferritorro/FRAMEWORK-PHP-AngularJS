@@ -312,39 +312,17 @@ div#categories_buttons {
   position: absolute;
   right: 15%;
   margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
 }
-#all_shop div.card.mb-3 {
-  max-width: 700px;
-  background-color: rgb(58, 54, 54);
-} 
-
-#all_shop div.row.g-0 h4 {
-  text-shadow: none;
+#all_shop img {
+  width: 285px;
+  height: 300px;
 }
-#all_shop div.row.g-0 p {
-  font-size: 20px;
-  color: white;
+#all_shop div.card{
+  margin-top: 50px;
+  background-color: #363636;
 }
-
-
-  #all_shop div.row.g-0 div img {
-    width: 80%;
-    height: 100%;
-  }
-
-#all_shop  div.row.g-0 button {
-  color: white;
-  background-color: transparent;
-  border: none;
-  position: absolute;
-  bottom: 3%;
-  right: 2%;
-}
-
-#all_shop  div.row.g-0 div img.img_bodywork,#filters div#bodywork img.img_bodywork_2 {
-  width: 30%;
-}
-
 
 #one_product {
   width: 60%;
@@ -404,6 +382,25 @@ div#data-detail {
   right: 0%;
   top: 20%;
 }
+nav.pagination_part {
+  position: absolute;
+  width: 80%;
+}
+nav.pagination_part ul.pagination {
+  justify-content: center;
+}
+
+nav.pagination_part ul.pagination li {
+  margin-left: 10px;
+  background-color: transparent;
+  border: 2px solid red;
+  color: red;
+  padding: 10px;
+}
+nav.pagination_part ul li:hover {
+ background-color: red;
+ color: black;
+}
 div#data-detail table {
   border-collapse: separate;
   border-spacing: 30px 15px;
@@ -422,14 +419,22 @@ div#filters div {
   display: flex;
   flex-flow: column;
 }
-div#filters div#bodywork {
+div#filters select {
+  width: 100%;
+  height: 20%;
+  text-align: center;
+  font-size: 15px;
+}
+div#filters div.bodywork {
   flex-flow: wrap;
 }
-div#filters div#bodywork * {
+div#filters div.bodywork * {
   margin: 5% 8%;
 }
-div#filters div#bodywork img {
+div#filters div.bodywork img {
   opacity: 0.2;
+  width: 80px;
+  height: 120px;
 }
 div#filters div label {
   width: 100%;
