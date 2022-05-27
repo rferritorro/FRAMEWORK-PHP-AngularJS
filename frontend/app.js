@@ -24,7 +24,7 @@ app.config(['$routeProvider','angularMapboxConfigProvider', function ($routeProv
             controller: "controller_shop",
             resolve: {
                 Allcars: function (services) {
-                    return services.post('shop','charge_cars',{limit: localStorage.limit});
+                    return services.post('shop','charge_cars',{limit: 0});
                 },
                 DataFilters: function (services) {
                     return services.post('shop','charge_filters');

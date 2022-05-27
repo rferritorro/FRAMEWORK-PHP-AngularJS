@@ -1,10 +1,15 @@
-localStorage.setItem('limit',1);
+localStorage.setItem('limit',0);
+localStorage.setItem('filter',JSON.stringify({}));
+app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop) {    
 
-app.controller('controller_shop', function($scope,Allcars,DataFilters,service_map,service_shop) {    
-
-    $scope.cars = Allcars;
-    $scope.pag_right=true;
+    $rootScope.cars = Allcars[0];
+    Allcars[1] > 8 ? $rootScope.pag_3 = false : $rootScope.pag_3 = true;
+    if (Allcars[1] > 4) {
+        $rootScope.pag_2 = false
+        $rootScope.pag_right = false
+    }
     $scope.filters = DataFilters;
+    $scope.kilometres = [{id:0,value:"0-4999"},{id:1,value:"5000-9999"},{id:2,value:"10000-49999"},{id:3,value:"+50000"}]
     $scope.hola = service_map;
 
     $scope.map = {
@@ -17,26 +22,76 @@ app.controller('controller_shop', function($scope,Allcars,DataFilters,service_ma
             $scope.modelo = data;
         })
     }
-    $scope.change_opacity = function(id) {
-      console.log(id);
+    $scope.change_opacity = async function() {
+        if (this.dataop == 0) {
+            this.dataop=1
+            this.myStyle = {opacity:1}
+        } else {
+            this.dataop=0
+            this.myStyle = {opacity:0.2}
+        }
     }
+    $scope.clean_filters = function() {
+        localStorage.setItem('limit',0);
+        localStorage.setItem('filter',JSON.stringify({}));
+        $route.reload();
+    }
+    $scope.filtrado = async function(data,value) {
+        var filtros = JSON.parse(localStorage.getItem('filter'))
+        if (data == 'marca') {
+            filtros.marca = value;
+            delete filtros.modelo
+        }
+        if (data == 'modelo') {
+            filtros.modelo = value;
+        }
+        if (data == 'kilometros') {
+            filtros.kilometros = value;
+        }
+        if (data == 'primer_precio') {
+            filtros.primer_precio = $scope.first_number;
+        }
+        if (data == 'segundo_precio') {
+            filtros.segundo_precio = $scope.second_number;
+        }
+        if (data == 'tipo') {
+            filtros.tipo = value;
+        }
+        if (data == 'categoria') {
+            filtros.categoria = value;
+        }
+        if (data == 'chasis') {
+            if (this.dataop == 1) {
+            filtros.chasis= value   
+            } else {
+                delete filtros.chasis
+            }
+        }
+        localStorage.setItem('filter',JSON.stringify(filtros))
+        var limit = localStorage.getItem('limit');
 
+        await service_shop.filtrar(filtros,limit)
+    }
     $scope.allcars = async function(index) {
 
         if (index == -1) {
             index = localStorage.getItem('limit');
-            index = index -1
+            index = (index-4)
         } else if (index == -2) {
             index = localStorage.getItem('limit');
-            index++
+            index = (parseFloat(index)+4)
         }
-
-        index <= 1 ? $scope.pag_left=false : $scope.pag_left=true;
-        index >= 2 ? $scope.pag_right=false : $scope.pag_right=true; 
-
+        
+        
+        var filtros = JSON.parse(localStorage.getItem('filter'))
         localStorage.setItem('limit',index);
-        //pagination padir datos.
-        $scope.cars = Allcars;
+
+        await service_shop.filtrar(filtros,index).then((data) => {
+
+           
+         })
+       
+
     }
 })
 

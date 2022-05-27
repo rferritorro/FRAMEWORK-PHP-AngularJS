@@ -17,6 +17,10 @@
         <uri>detail_car</uri>
     </function>
     <function>
+        <name>filter</name>
+        <uri>get_filter</uri>
+    </function>
+    <function>
         <name>count</name>
         <uri>count</uri>
     </function>

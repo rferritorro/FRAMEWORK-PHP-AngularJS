@@ -31,7 +31,7 @@
 
 
         public function get_filter_cars_BLL($args) {
-            return $this -> dao -> select_filter_cars_cars($this->db,$args[0],$args[1]);
+            return $this -> dao -> select_filter_cars($this->db,$args[0],$args[1]);
 
         }
         public function get_detail_BLL($args) {

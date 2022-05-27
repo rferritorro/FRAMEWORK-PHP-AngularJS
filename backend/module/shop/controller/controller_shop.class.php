@@ -9,11 +9,10 @@ class controller_shop {
         echo json_encode(common::load_model('shop_model', 'get_filter_model',[$_POST["marca"]]));
     }
     function Coches() {
-        
             echo json_encode(common::load_model('shop_model', 'get_cars',[$_POST["limit"]]));
-        // } else {
-        //     echo json_encode(common::load_model('shop_model', 'get_filter_cars',[$_POST["limit"],$_POST["filtros"]]));
-        // }
+    }
+    function filter() {
+        echo json_encode(common::load_model('shop_model', 'get_filter_cars',[$_POST["filter"],$_POST["limit"]]));
     }
     // function detalle_coche() {
     //     echo json_encode(common::load_model('shop_model', 'get_detail',[$_POST["id"]]));
