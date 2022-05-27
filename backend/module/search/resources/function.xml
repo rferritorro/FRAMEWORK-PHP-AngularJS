@@ -6,7 +6,15 @@
     </function>
     <function>
         <name>categoria</name>
-        <uri>category</uri>
+        <uri>categorie</uri>
+    </function>
+    <function>
+        <name>change_categoria</name>
+        <uri>get_categorie</uri>
+    </function>
+    <function>
+        <name>city</name>
+        <uri>city</uri>
     </function>
     <function>
         <name>autocompletar</name>

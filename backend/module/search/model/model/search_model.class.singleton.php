@@ -22,7 +22,7 @@ class search_model {
             return $this->bll->get_category_free_BLL();
         }
         public function get_category($args) {
-            return $this->bll->get_category_BLL($args[0]);
+            return $this->bll->get_category_BLL($args);
         }
 
         public function get_city($args) { 

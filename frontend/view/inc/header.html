@@ -21,24 +21,23 @@
                 </li>
                 <li class="space">
                 </li>
-                <!-- <li class="search_inputs">
+                <li class="search_inputs">
                     <i class="fas fa-gas-pump fa-3x"></i>
-                    <select id="select_type_header">
-                            <option value="0">--</option>
+                    <select ng-model="type_search" ng-click="change_type(type_search.id)" ng-options="type.nom for type in typesearch">
+                            
                     </select>
                 </li>
                 <li class="search_inputs">
                     <i class="fas fa-car fa-3x"></i>
-                    <select id="select_brand_header">
-                        <option value="0">--</option>
+                    <select ng-model="categorie_search" ng-options="categorie.brand for categorie in categoriesearch">
                     </select>
                 </li>
                 <li class="search_inputs_text">                        
-                    <input type="text" id="autocom" maxlength="20" style="width: 300px;" autocomplete="off"/>
+                    <input type="text" ng-model="text_complete" ng-keyup="find_city_search(text_complete)" maxlength="20" style="width: 300px;" autocomplete="off"/>
                     <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 150px"></div>
                     <button class="send_information_header"><i class="fas fa-search fa-2x"></i></button>
                 </li>
-                <li class="panel_user">
+                <!-- <li class="panel_user">
                     <div id="default_panel" class="default_panel_user">
                     </div>
                 </li> -->

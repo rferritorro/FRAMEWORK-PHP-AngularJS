@@ -24,7 +24,7 @@
 			return $this ->dao->select_data_category_free($this->db);
 		}
 		public function get_category_BLL($args) {
-			return $this ->dao->select_data_category($this->db,$args);
+			return $this ->dao->select_data_category($this->db,$args[0]);
 		}
 
 		public function get_city_BLL($args) {

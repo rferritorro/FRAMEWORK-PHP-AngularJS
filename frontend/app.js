@@ -1,9 +1,6 @@
-var app = angular.module('Proyecto_V.5-RafaFerri', ['ngRoute', 'toastr','angularMapbox']);
+var app = angular.module('Proyecto_V.5-RafaFerri', ['ngRoute', 'toastr']);
 
-app.config(['$routeProvider','angularMapboxConfigProvider', function ($routeProvider,angularMapboxConfigProvider) {
-    angularMapboxConfigProvider.config({
-        accessToken: 'pk.eyJ1IjoicmVpZjQwMCIsImEiOiJjbDNra2NqbGkxZHY5M2txdzdocGgwbGk0In0.dxlwgjzgMiOthGT2H5YDfg'
-    });
+app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
         .when("/home", {
         templateUrl: "frontend/module/home/view/home.html", 
@@ -39,3 +36,25 @@ app.config(['$routeProvider','angularMapboxConfigProvider', function ($routeProv
             controller: "controller_home"
         });
 }]);
+
+app.run(function($rootScope,$rootScope,service_search){
+ 
+    service_search.type_search();
+    service_search.categorie_search();
+
+    $rootScope.change_type = function(data){
+        service_search.change_categorie(data);
+    }
+
+    $rootScope.find_city_search = function(value){
+        service_search.city_search(value);
+    }
+
+    // $rootScope.click_autocomplete = function(sexo = undefined, categoria = undefined, autocomplete){
+    //     services_search.search_autocomplete(sexo, categoria, autocomplete);
+    // }
+
+    // $rootScope.click_search = function(sexo = undefined, categoria = undefined, autocomplete = undefined){ 
+    //     services_search.search(sexo, categoria, autocomplete);
+    // }
+});
