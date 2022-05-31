@@ -37,7 +37,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.run(function($rootScope,$rootScope,service_search){
+app.run(function($rootScope,service_search){
  
     service_search.type_search();
     service_search.categorie_search();
@@ -46,15 +46,31 @@ app.run(function($rootScope,$rootScope,service_search){
         service_search.change_categorie(data);
     }
 
-    $rootScope.find_city_search = function(value){
-        service_search.city_search(value);
+    $rootScope.find_city_search = function(type,categorie,city){
+        service_search.city_search(type,categorie,city);
     }
 
-    // $rootScope.click_autocomplete = function(sexo = undefined, categoria = undefined, autocomplete){
-    //     services_search.search_autocomplete(sexo, categoria, autocomplete);
-    // }
+    $rootScope.set_value = function(ciudad) {
+        $rootScope.text_complete = ciudad;
+    }
 
-    // $rootScope.click_search = function(sexo = undefined, categoria = undefined, autocomplete = undefined){ 
-    //     services_search.search(sexo, categoria, autocomplete);
-    // }
+    $rootScope.send_information_shop = function(type,brand) {
+        console.log(type,brand)
+        var object = {};
+        if (type != undefined) {
+            object.type =type
+        }
+        if (brand != undefined) {
+            object.brand = brand
+        }
+        if (this.text_complete != undefined) {
+            object.city = this.text_complete
+        }
+
+        if (JSON.stringify(object)!='{}') {
+            localStorage.setItem('filter_search',JSON.stringify(object));
+            window.location.href="#/shop"
+        }
+    }
+  
 });

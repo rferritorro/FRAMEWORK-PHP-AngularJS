@@ -4,7 +4,7 @@
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
       <!-- Slides -->
-        <div  class="swiper-slide" ng-repeat="logo in brands">
+        <div  class="swiper-slide" ng-click="home_filter(logo.id,'brand')" ng-repeat="logo in brands">
             <img src="frontend/{{logo.img}}" />
             <h1>{{logo.brand}}</h1>
         </div>
@@ -14,7 +14,7 @@
   </div>
 <h1>Motor types</h1>
 <div id="types_buttons">
-  <div class="card" ng-repeat="type in types" style="width: 18rem;">
+  <div class="card" ng-repeat="type in types" ng-click="home_filter(type.id,'type')" style="width: 18rem;">
     <img src="frontend/{{type.img}}" class="card-img-top">
     <div class="card-body">
       <h2 class="card-title">{{type.nom}}</h2>
@@ -24,7 +24,7 @@
 </div></br>
 <h1>Categories of Cars</h1>
 <div id="categories_buttons">
-  <div class="card" ng-repeat="categorie in categories" style="width: 18rem;">
+  <div class="card" ng-repeat="categorie in categories" ng-click="home_filter(categorie.id,'categorie')" style="width: 18rem;">
     <img src="frontend/{{categorie.img}}" class="card-img-top">
     <div class="card-body">
       <h2 class="card-title">{{categorie.nom}}</h2>

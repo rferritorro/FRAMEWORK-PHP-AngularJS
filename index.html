@@ -54,6 +54,8 @@
         <script src="frontend/module/home/services/service_news.js"></script>
         <script src="frontend/module/shop/services/service_map.js"></script>
         <script src="frontend/module/shop/services/service_shop.js"></script>
+        <script src="frontend/module/shop/services/service_detail.js"></script>
+        <script src="frontend/module/shop/services/service_filter.js"></script>
         <script src="frontend/module/search/services/service_search.js"></script>
 
 
@@ -65,7 +67,7 @@
         
     </head>
     <body>
-        <div ng-include ="'frontend/view/inc/header.html'"></div>
+        <div ng-hide="header" ng-include ="'frontend/view/inc/header.html'"></div>
         <div ng-view autoscroll = "true"></div>
     </body>
     </html>

@@ -1,24 +1,69 @@
-localStorage.setItem('limit',0);
-localStorage.setItem('filter',JSON.stringify({}));
-app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop) {    
+
+app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop,service_filter,service_detail) {    
+    localStorage.setItem('limit',0);
+    localStorage.setItem('filter',JSON.stringify({}));
+  
 
     $rootScope.cars = Allcars[0];
+    $scope.kilometres = [{id:1,value:"0-4999"},{id:2,value:"5000-9999"},{id:3,value:"10000-49999"},{id:4,value:"+50000"}]
+    $scope.filters = DataFilters;
+    $scope.body_details = true;
+
+
+    var filter_search = JSON.parse(localStorage.getItem('filter_search'))
+
+    var filter_home = JSON.parse(localStorage.getItem('filter_home'))
+
+    if (filter_search && $scope.filters) {
+
+        var filtros = JSON.parse(localStorage.getItem('filter'))
+
+        if (filter_search.type) {
+            $scope.type_data = filter_search.type;
+            filtros.tipo = filter_search.type;
+        }
+        if (filter_search.brand) {
+            $scope.brands = filter_search.brand;
+            filtros.marca = filter_search.brand;
+        }
+         service_filter.resolve_filters(filtros);
+
+    }
+    if (filter_home && $scope.filters) {
+
+        var filtros = JSON.parse(localStorage.getItem('filter'))
+
+        if (filter_home.marca) {
+            $scope.brands = filter_home.marca;
+            filtros.marca = filter_home.marca;
+        }
+        if (filter_home.tipo) {
+            $scope.type_data = filter_home.tipo;
+            filtros.tipo = filter_home.tipo;
+        }
+        if (filter_home.categoria) {
+            $scope.categorie_data = filter_home.categoria;
+            filtros.categoria = filter_home.categoria;
+        }
+
+        service_filter.resolve_filters(filtros);
+
+    }
+
     Allcars[1] > 8 ? $rootScope.pag_3 = false : $rootScope.pag_3 = true;
+    
     if (Allcars[1] > 4) {
         $rootScope.pag_2 = false
         $rootScope.pag_right = false
     }
-    $scope.filters = DataFilters;
-    $scope.kilometres = [{id:0,value:"0-4999"},{id:1,value:"5000-9999"},{id:2,value:"10000-49999"},{id:3,value:"+50000"}]
     
     service_map.map($rootScope.cars);
 
 
-    $scope.dropdown = async function(event) {
-        await service_shop.charge_model(event).then((data) => {
-            $scope.modelo = data;
-        })
-    }
+    $scope.dropdown = async function() {
+        await service_shop.charge_model(this.brands)
+    }   
+    
     $scope.change_opacity = async function() {
         if (this.dataop == 0) {
             this.dataop=1
@@ -28,47 +73,53 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
             this.myStyle = {opacity:0.2}
         }
     }
+
     $scope.clean_filters = function() {
+
         localStorage.setItem('limit',0);
         localStorage.setItem('filter',JSON.stringify({}));
+        localStorage.removeItem('filter_search')
+        localStorage.removeItem('filter_home')
         $route.reload();
     }
-    $scope.filtrado = async function(data,value) {
+    $scope.filtrado = async function(data = undefined) {  
+
         var filtros = JSON.parse(localStorage.getItem('filter'))
-        if (data == 'marca') {
-            filtros.marca = value;
+  
+        if (this.brands) {
+            filtros.marca = this.brands;
             delete filtros.modelo
         }
-        if (data == 'modelo') {
-            filtros.modelo = value;
+        if (this.model_data) {
+            filtros.modelo = this.model_data;
         }
-        if (data == 'kilometros') {
-            filtros.kilometros = value;
+        if (this.kilometre_data) {
+            filtros.kilometros = this.kilometre_data.id;
         }
-        if (data == 'primer_precio') {
-            filtros.primer_precio = $scope.first_number;
+
+        if (this.first_number) {
+            filtros.primer_precio = this.first_number;
         }
-        if (data == 'segundo_precio') {
-            filtros.segundo_precio = $scope.second_number;
+        if (this.second_number) {
+            filtros.segundo_precio = this.second_number;
         }
-        if (data == 'tipo') {
-            filtros.tipo = value;
+        if (this.type_data) {
+            filtros.tipo = this.type_data;
         }
-        if (data == 'categoria') {
-            filtros.categoria = value;
+        if (this.categorie_data) {
+            filtros.categoria = this.categorie_data;
         }
-        if (data == 'chasis') {
+        if (data == 0) {
             if (this.dataop == 1) {
-            filtros.chasis= value   
+            filtros.chasis= this.chasis.id   
             } else {
                 delete filtros.chasis
             }
         }
-        localStorage.setItem('filter',JSON.stringify(filtros))
-        var limit = localStorage.getItem('limit');
+        
+        await service_filter.resolve_filters(filtros);
 
-        await service_shop.filtrar(filtros,limit)
-        await service_map.map($rootScope.cars);
+        // await service_map.map($rootScope.cars);
 
     }
     $scope.allcars = async function(index) {
@@ -89,9 +140,46 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         await service_map.map($rootScope.cars);
 
     }
+    $scope.show_detail = async function(id) {
+        $scope.body_shop = true;
+        $scope.body_details = false;
+        $rootScope.header = true;
+
+        await service_detail.show_detail(id);
+
+        setTimeout(() => {  
+            var galleryTop = new Swiper('.swiper-shop', {
+                // Optional parameters
+                centeredSlides: true,
+                slidesPerView: 1,
+              })
+            
+            var galleryThumbs = new Swiper('.gallery-thumbs', {
+
+                direction: 'vertical',
+                centeredSlides: true,
+                touchRatio: 0.2,
+                slideToClickedSlide: true,
+                      loopedSlides: 4
+              })
+            
+              galleryTop.controller.control = galleryThumbs;
+              galleryThumbs.controller.control = galleryTop;
+            },0)
+
+    }
+
+    $scope.return = function() {
+
+        $scope.body_shop = false;
+        $scope.body_details = true;
+        $rootScope.header = false;
+
+    }
 })
 
 function map(lat,long,ciudad) {
+
     mapboxgl.accessToken = '';
         var map = new mapboxgl.Map({
         container: 'map',
@@ -100,7 +188,9 @@ function map(lat,long,ciudad) {
         zoom: 12
 });
 map.addControl(new mapboxgl.NavigationControl());
+
 var geojson = {
+
     type: 'FeatureCollection',
     features: [{
         type: 'Feature',
@@ -114,6 +204,7 @@ var geojson = {
     }]
 };
 geojson.features.forEach(function(marker) {
+
   var el = document.createElement('div');
   el.className = "marker";
   new mapboxgl.Marker(el)

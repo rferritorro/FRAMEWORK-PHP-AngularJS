@@ -14,9 +14,9 @@ class controller_shop {
     function filter() {
         echo json_encode(common::load_model('shop_model', 'get_filter_cars',[$_POST["filter"],$_POST["limit"]]));
     }
-    // function detalle_coche() {
-    //     echo json_encode(common::load_model('shop_model', 'get_detail',[$_POST["id"]]));
-    // }
+    function detalle_coche() {
+        echo json_encode(common::load_model('shop_model', 'get_detail',[$_POST["id"]]));
+    }
 
     // function count() {
     //     echo json_encode(common::load_model('shop_model', 'get_count'));

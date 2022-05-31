@@ -1,56 +1,129 @@
-<div id="grup_order">
-</div>
-<div id="all_shop">
-  <nav class="pagination_part" aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item" ng-click="allcars(-1)" ng-show="pag_left" ><i class="fas fa-angle-double-left"></i></li>
-      <li class="page-item" ng-click="allcars(0)">1</li>
-      <li class="page-item" ng-click="allcars(4)" ng-hide="pag_2">2</li>
-      <li class="page-item" ng-click="allcars(8)" ng-hide="pag_3">3</li>
-      <li class="page-item" ng-click="allcars(-2)" ng-hide="pag_right"><i class="fas fa-angle-double-right"></i></li>
-    </ul>
-  </nav>
-        <div class="card" ng-repeat="car in cars" style="width: 18rem;">
-            <img src="frontend/{{car.img}}" class="card-img-top">
-            <div class="card-body">
-              <h2 class="card-title">{{car.brand_car}}  {{car.model_car}}</h2>
-              <h3>{{car.kilometres}} km</h3>
-              <h3>{{car.price}} €</h3>
-              <i id={{car.id}} class="fas fa-eye btn btn-dark"></i>
-              <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
-            </div>
-        </div>
-</div>
-<div id="one_product" hidden>
-</div>
-<div id="filters">
-  <i class="fas fa-trash-alt btn btn-danger" ng-model="clean" ng-click="clean_filters()"></i>
-  <h1>Marca</h1>
-    <select ng-model="brands" ng-change="dropdown(brands.id)" ng-click="filtrado('marca',brands.id)" ng-options="brand.brand for brand in filters[0]">
-    </select>
-  <h1>Modelo</h1>
-    <select ng-model="model_data" ng-click="filtrado('modelo',model_data.id)" ng-options="model.model_car for model in modelo">
-    </select>
-    <h1>Kilometros</h1>
-    <select ng-model="kilometre_data"  ng-click="filtrado('kilometros',kilometre_data.id)" ng-options="kilometre.value for kilometre in kilometres">
-    </select>
-  <h1>Precio</h1>
-    <div>
-      <input type="number" ng-model="first_number" ng-keyup="filtrado('primer_precio')">
-      <input type="number" ng-model="second_number"ng-keyup="filtrado('segundo_precio')">
-    </div>
-  <h1>Tipo</h1>
-    <select ng-model="type_data" ng-click="filtrado('tipo',type_data.id)" ng-options=" type.nom for type in filters[1]" >
-    </select>
-  <h1>Categoria</h1>
-    <select ng-model="categorie_data" ng-click="filtrado('categoria',categorie_data.id)" ng-options="categorie.nom for categorie in filters[2]">
-    </select>
-  <h1>Carroceria</h1>
-    <div class="bodywork">
-      <img ng-style="myStyle" id="{{bodywork.id}}" ng-click="change_opacity() && filtrado('chasis',bodywork.id)" dataop="0" ng-repeat="bodywork in filters[3]" class="img_bodywork_2" value="{{bodywork.id}}" src="frontend/{{bodywork.bodywork}}"/>
-    </div>
-</div>
+<div ng-hide="body_shop">
+  <div id="grup_order">
+  </div>
+  <div id="all_shop">
+    <nav class="pagination_part" aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" ng-click="allcars(-1)" ng-show="pag_left" ><i class="fas fa-angle-double-left"></i></li>
+        <li class="page-item" ng-click="allcars(0)">1</li>
+        <li class="page-item" ng-click="allcars(4)" ng-hide="pag_2">2</li>
+        <li class="page-item" ng-click="allcars(8)" ng-hide="pag_3">3</li>
+        <li class="page-item" ng-click="allcars(-2)" ng-hide="pag_right"><i class="fas fa-angle-double-right"></i></li>
+      </ul>
+    </nav>
+          <div class="card" ng-repeat="car in cars" style="width: 18rem;">
+              <img src="frontend/{{car.img}}" class="card-img-top">
+              <div class="card-body">
+                <h2 class="card-title">{{car.brand_car}}  {{car.model_car}}</h2>
+                <h3>{{car.kilometres}} km</h3>
+                <h3>{{car.price}} €</h3>
+                <i id={{car.id}} class="fas fa-eye btn btn-dark" ng-click="show_detail(car.id)"></i>
+                <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
+              </div>
+          </div>
+  </div>
+  <div id="one_product" hidden>
+  </div>
+  <div id="filters">
+    <i class="fas fa-trash-alt btn btn-danger" ng-model="clean" ng-click="clean_filters()"></i>
+    <h1>Marca</h1>
+      <select ng-model="brands" ng-change="dropdown()" ng-click="filtrado()">
+        <option value="{{brand.id}}" ng-repeat="brand in filters[0]">{{brand.brand}}</option>
+      </select>
+    <h1>Modelo</h1>
+      <select ng-model="model_data" ng-change="filtrado()">
+        <option value="{{model.id}}" ng-repeat="model in modelos">{{model.model_car}}</option>
+      </select>
+      <h1>Kilometros</h1>
+      <select ng-model="kilometre_data"  ng-change="filtrado()" ng-options="kilometre.value for kilometre in kilometres">
+      </select>
+    <h1>Precio</h1>
+      <div>
+        <input type="number" ng-model="first_number" ng-keyup="filtrado()">
+        <input type="number" ng-model="second_number"ng-keyup="filtrado()">
+      </div>
+    <h1>Tipo</h1>
+      <select ng-model="type_data" ng-change="filtrado()" >
+          <option value="{{type.id}}" ng-repeat="type in filters[1]">{{type.nom}}</option>      
+        </select>
+    <h1>Categoria</h1>
+      <select ng-model="categorie_data" ng-change="filtrado()" >
+        <option value="{{categorie.id}}" ng-repeat="categorie in filters[2]">{{categorie.nom}}</option>      
+      </select>
+    <h1>Carroceria</h1>
+      <div class="bodywork">
+        <img ng-style="myStyle" id="{{chasis.id}}" ng-click="change_opacity() && filtrado(0)" dataop="0" ng-repeat="chasis in filters[3]" class="img_bodywork_2" value="{{chasis.id}}" src="frontend/{{chasis.bodywork}}"/>
+      </div>
+  </div>
 
-<div id="map_cars">
-  <div ng-model="map" style='width: 400px; height: 300px;'></div>
+  <div id="map_cars">
+    <div ng-model="map" style='width: 400px; height: 300px;'></div>
+  </div>
+</div>
+<div ng-hide="body_details">
+  <i class="far fa-caret-square-left fa-2x btn-dark" ng-click="return()"></i>
+  <h1>{{detail_car[0].brand_car}} {{detail_car[0].model_car}}</h1>
+  <div class="swiper_box">
+    <div class="swiper-shop">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+          <div  class="swiper-slide" ng-repeat="img_car in detail_car[1]">
+              <img src="frontend/{{img_car.img}}" />
+          </div>
+        </div> 
+        <!-- If we need scrollbar -->
+      <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="gallery-thumbs">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper">
+        <!-- Slides -->
+          <div  class="swiper-slide" ng-repeat="img_car in detail_car[1]">
+              <img src="frontend/{{img_car.img}}" />
+          </div>
+        </div> 
+        <!-- If we need scrollbar -->
+    </div>
+  </div>
+  <div class="shop_table">
+    <table>
+        <tr>
+          <th>Marca</th>
+          <td>{{detail_car[0].brand_car}}</td>
+        </tr>
+        <tr style="background-color: grey">
+          <th>Modelo</th>
+          <td>{{detail_car[0].model_car}}</td>
+        </tr>
+        <tr>
+          <th>Motor</th>
+          <td>{{detail_car[0].type}}</td>
+        </tr>
+        <tr>
+          <th>Estado</th>
+          <td>{{detail_car[0].categories}}</td>
+        </tr>
+        <tr>
+          <th>Fecha</th>
+          <td>{{detail_car[0].date}}</td>
+        </tr>
+        <tr>
+          <th>CV</th>
+          <td>{{detail_car[0].CV}}</td>
+        </tr>
+        <tr>
+          <th>Localidad</th>
+          <td>{{detail_car[0].ciudad}}</td>
+        </tr>
+        <tr>
+          <th>Kilometros</th>
+          <td>{{detail_car[0].kilometres}}</td>
+        </tr>
+        <tr>
+          <th>Precio</th>
+          <td>{{detail_car[0].price}}</td>
+        </tr>
+    </table>
+  </div>
 </div>

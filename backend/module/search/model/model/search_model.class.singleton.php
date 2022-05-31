@@ -28,17 +28,5 @@ class search_model {
         public function get_city($args) { 
             return $this->bll->get_city_BLL($args);
         }
-        public function get_only_city($args) { 
-            return $this->bll->get_only_city_BLL($args);
-        }
-        public function get_without_city() { 
-            return $this->bll->get_without_city_BLL();
-        }
-        public function get_city_without_type($args) { 
-            return $this->bll->get_city_without_type_BLL($args);
-        }
-        public function get_city_without_brand($args) {
-            return $this->bll->get_city_without_brand_BLL($args);
-        }
 }
 ?>  

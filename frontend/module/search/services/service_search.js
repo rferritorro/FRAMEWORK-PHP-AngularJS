@@ -1,4 +1,4 @@
-app.factory('service_search', function(services,$rootScope) {
+app.factory('service_search', function(services,$rootScope,toastr) {
     let service = {type_search:type_search,categorie_search:categorie_search,change_categorie:change_categorie,city_search:city_search};
     return service;
 
@@ -28,12 +28,17 @@ app.factory('service_search', function(services,$rootScope) {
             console.log(error);
         });
     }
-    function city_search(characters) {
-        return services.post('search','city',{word:characters})
-        .then(function(response) {
-            console.log(response)       
-        }, function(error) {
-            console.log(error);
-        });
+
+    function city_search(type=undefined,categorie=undefined,characters) {
+        if (characters != "") {
+            return services.post('search','city',{type:type,categorie:categorie,word:characters})
+            .then(function(response) {
+                response.length != 0 ? $rootScope.city = response : $rootScope.city = ""
+            }, function(error) {
+                console.log(error);
+            });
+        } else {
+            $rootScope.city = ""
+        }
     }
 });

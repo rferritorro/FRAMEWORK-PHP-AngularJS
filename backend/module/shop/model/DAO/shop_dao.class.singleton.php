@@ -102,25 +102,25 @@
                 array_push($sql_siltered," mc.id='$value'");
             }
             if ($filters["kilometros"]) {
-                if ($filters["kilometros"] == 3) {
+                if ($filters["kilometros"] == 4) {
                     $km_1 = 50000;
                     array_push($sql_siltered," kilometres >=".$km_1);
                     
                 } else {
-                    if ($filters["kilometros"] == 0) {
+                    if ($filters["kilometros"] == 1) {
                         $km_1 = 0;
                         $km_2 = 4999; 
-                    } else if ($filters["kilometros"] == 1) {
+                    } else if ($filters["kilometros"] == 2) {
                         $km_1 = 5000;
                         $km_2 = 9999;
-                    } else if ($filters["kilometros"] == 2) {
+                    } else if ($filters["kilometros"] == 3) {
                         $km_1 = 10000;
                         $km_2 = 49999;
                     } 
                     array_push($sql_siltered," kilometres BETWEEN ".$km_1." AND ".$km_2);   
                 }
             }
-            if ($filters["primer_precio"] && $filters["precio_2"]) {
+            if ($filters["primer_precio"] && $filters["segundo_precio"]) {
                 
                 array_push($sql_siltered," price BETWEEN ".$filters["segundo_precio"]." AND ".$filters["precio_2"]);
                 

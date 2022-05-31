@@ -1,4 +1,4 @@
-app.controller('controller_home', function($scope,BrandsCar,TypeCar,CategoriesCar,service_news) {
+app.controller('controller_home', function($scope,$rootScope,BrandsCar,TypeCar,CategoriesCar,service_news) {
 
   $scope.brands= BrandsCar;
   $scope.types= TypeCar;
@@ -6,6 +6,22 @@ app.controller('controller_home', function($scope,BrandsCar,TypeCar,CategoriesCa
   $scope.service_news_button = true;
 
   $scope.news = service_news.more_news([0,null]);
+
+  $rootScope.home_filter = function(data,type) {
+    var obj = {};
+    if (type == "brand") {
+      obj.marca = data;
+    } else if (type == "type") {
+      obj.tipo = data;
+
+    }else if (type == "categorie") {
+      obj.categoria = data;
+
+    }
+    
+    localStorage.setItem('filter_home',JSON.stringify(obj));
+    window.location.href="#/shop"
+  }
 
 setTimeout(() => {  
   new Swiper('.swiper', {
@@ -20,11 +36,10 @@ setTimeout(() => {
     })
   },0)
 
-  
+
 $scope.allnews = function(){
 
   var index = JSON.parse(localStorage.getItem('limits'));
-  console.log(index[0]);
 
   if (index[0] == 6) {
 
@@ -40,28 +55,3 @@ $scope.allnews = function(){
 
 }
 })
-
-
-
-// function charge_filter_home() {
-//   var filtro = {};
-
-//   $(document).on('click','.image_brand_car',function () {
-//       var id_brand_car = this.getAttribute('data-id');
-//       brand = {marca: id_brand_car};
-//       filtro = Object.assign(filtro,brand);
-//       reload_shop(filtro);
-//   });
-//   $(document).on('click','.image-type',function () {
-//       var id_type_car = this.getAttribute('data-id');
-//       type = {tipo: id_type_car};
-//       filtro = Object.assign(filtro,type);
-//       reload_shop(filtro);
-//   });
-//   $(document).on('click','.image-category',function () {
-//       var id_category_car = this.getAttribute('data-id');
-//       categories = {categoria: id_category_car};
-//       filtro = Object.assign(filtro,categories);
-//       reload_shop(filtro);
-//   });
-  

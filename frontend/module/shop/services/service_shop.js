@@ -1,4 +1,4 @@
-app.factory('service_shop', function(services,$rootScope,toastr) {
+app.factory('service_shop', ['services','$rootScope','toastr',function(services,$rootScope,toastr) {
     let service = {charge_model: charge_model,filtrar:filtrar};
     return service;
 
@@ -6,7 +6,9 @@ app.factory('service_shop', function(services,$rootScope,toastr) {
 
         return services.post('shop', 'model_filter', {marca: value})
         .then(function(response) {
-          return response
+
+          $rootScope.modelos =  response
+
         }, function(error) {
             console.log(error);
         });
@@ -43,7 +45,8 @@ app.factory('service_shop', function(services,$rootScope,toastr) {
                     
                     parseFloat(limite)+4 > response[1] ? $rootScope.pag_right=true : $rootScope.pag_right=false;
                 } else {
-                    toastr.error("There aren't cars with this filters")
+                    toastr.info("There aren't cars with this filters")
+                    console.log("no hay")
                 }
 
 
@@ -52,4 +55,4 @@ app.factory('service_shop', function(services,$rootScope,toastr) {
             });
         }
     }
-});
+}]);

@@ -33,9 +33,11 @@
                     </select>
                 </li>
                 <li class="search_inputs_text">                        
-                    <input type="text" ng-model="text_complete" ng-keyup="find_city_search(text_complete)" maxlength="20" style="width: 300px;" autocomplete="off"/>
-                    <div id="search_auto" style="background-color: white;opacity: 0.8;color: black;z-index: 102;position: fixed;width: 150px"></div>
-                    <button class="send_information_header"><i class="fas fa-search fa-2x"></i></button>
+                    <input list="text_data" ng-model="text_complete" ng-keyup="find_city_search(type_search.id,categorie_search.brand,text_complete)" maxlength="20" style="width: 300px;" autocomplete="false"/>
+                    <datalist id="text_data">
+                        <option ng-repeat="ciudad in city" ng-click="set_value(ciudad.ciudad)" value="{{ciudad.ciudad}}">{{ciudad.ciudad}}</option>
+                    </datalist>
+                    <button class="send_information_header" ng-click="send_information_shop(type_search.id,categorie_search.id)"><i class="fas fa-search fa-2x"></i></button>
                 </li>
                 <!-- <li class="panel_user">
                     <div id="default_panel" class="default_panel_user">

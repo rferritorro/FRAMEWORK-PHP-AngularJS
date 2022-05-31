@@ -30,17 +30,4 @@
 		public function get_city_BLL($args) {
 			return $this ->dao->select_data_city($this->db,$args[0],$args[1],$args[2]);
 		}
-		public function get_only_city_BLL($args) {
-			return $this ->dao->select_data_only_city($this->db,$args[0]);
-		}
-		public function get_without_city_BLL($args) {
-			return $this ->dao->select_data_without_city($this->db);
-		}
-		public function get_city_without_type_BLL($args) {
-			return $this ->dao->select_data_without_type($this->db,$args[0],$args[1]);
-		}
-		public function get_city_without_brand_BLL($args) {
-			return $this ->dao->select_data_without_brand($this->db,$args[0],$args[1]);
-		}
-		
     }
