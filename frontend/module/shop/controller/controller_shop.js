@@ -1,4 +1,3 @@
-
 app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop,service_filter,service_detail) {    
     localStorage.setItem('limit',0);
     localStorage.setItem('filter',JSON.stringify({}));
@@ -81,16 +80,17 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         localStorage.removeItem('filter_search')
         localStorage.removeItem('filter_home')
         $route.reload();
+        window.location.reload();
     }
     $scope.filtrado = async function(data = undefined) {  
 
         var filtros = JSON.parse(localStorage.getItem('filter'))
   
         if (this.brands) {
-            filtros.marca = this.brands;
-            delete filtros.modelo
+            filtros.marca = this.brands
+            delete filtros.modelo 
         }
-        if (this.model_data) {
+        if (data == 1) {
             filtros.modelo = this.model_data;
         }
         if (this.kilometre_data) {
@@ -116,11 +116,8 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
                 delete filtros.chasis
             }
         }
-        
+
         await service_filter.resolve_filters(filtros);
-
-        // await service_map.map($rootScope.cars);
-
     }
     $scope.allcars = async function(index) {
 
@@ -141,6 +138,7 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
 
     }
     $scope.show_detail = async function(id) {
+
         $scope.body_shop = true;
         $scope.body_details = false;
         $rootScope.header = true;

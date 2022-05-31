@@ -31,7 +31,7 @@
         <option value="{{brand.id}}" ng-repeat="brand in filters[0]">{{brand.brand}}</option>
       </select>
     <h1>Modelo</h1>
-      <select ng-model="model_data" ng-change="filtrado()">
+      <select ng-model="model_data" ng-change="filtrado(1)">
         <option value="{{model.id}}" ng-repeat="model in modelos">{{model.model_car}}</option>
       </select>
       <h1>Kilometros</h1>
@@ -57,7 +57,7 @@
   </div>
 
   <div id="map_cars">
-    <div ng-model="map" style='width: 400px; height: 300px;'></div>
+    <div id="map" style='width: 500px; height: 600px;'></div>
   </div>
 </div>
 <div ng-hide="body_details">
@@ -117,7 +117,10 @@
         </tr>
     </table>
   </div>
-  <div id="map_cars_detail"></div>
+  <div id="map_cars_detail">
+    <div id="map_detail" style='width: 350px; height: 400px;'></div>
+  </div>
+
   <div class="more_details">
     <div class="tarjet_releated" ng-repeat="car in more_car">
       <h5>{{car.att}}</h5>

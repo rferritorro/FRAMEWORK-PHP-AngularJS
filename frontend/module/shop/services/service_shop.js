@@ -1,4 +1,4 @@
-app.factory('service_shop', ['services','$rootScope','toastr',function(services,$rootScope,toastr) {
+app.factory('service_shop', ['services','service_map','$rootScope','toastr',function(services,service_map,$rootScope,toastr) {
     let service = {charge_model: charge_model,filtrar:filtrar};
     return service;
 
@@ -16,12 +16,12 @@ app.factory('service_shop', ['services','$rootScope','toastr',function(services,
     }
 
     function filtrar(filtro,limite) {
-        if (JSON.stringify(filtro)=='{}') {
+            if (JSON.stringify(filtro)=='{}') {
             return services.post('shop', 'charge_cars', {limit: limite})
             .then(function(response) {
 
                 $rootScope.cars = response[0];
-              
+                service_map.map($rootScope.cars);
                 limite < 1 ? $rootScope.pag_left=false : $rootScope.pag_left=true;
 
                 8 < response[1] ? $rootScope.pag_3=false : $rootScope.pag_3=true;
@@ -37,6 +37,7 @@ app.factory('service_shop', ['services','$rootScope','toastr',function(services,
 
                 if (response[1] > 0) {
                     $rootScope.cars = response[0];
+                    service_map.map($rootScope.cars);
                     limite < 1 ? $rootScope.pag_left=false : $rootScope.pag_left=true;
     
                     4 < response[1] ? $rootScope.pag_2=false : $rootScope.pag_2=true;
@@ -54,5 +55,6 @@ app.factory('service_shop', ['services','$rootScope','toastr',function(services,
                 console.log(error);
             });
         }
+        
     }
 }]);
