@@ -34,6 +34,6 @@
     </function>
     <function>
         <name>redireccionamiento</name>
-        <uri>redirect</uri>
+        <uri>get_redirect</uri>
     </function>
 </functions>

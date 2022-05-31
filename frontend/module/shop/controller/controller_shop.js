@@ -147,6 +147,8 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
 
         await service_detail.show_detail(id);
 
+        await service_detail.more_details(id);
+
         setTimeout(() => {  
             var galleryTop = new Swiper('.swiper-shop', {
                 // Optional parameters
@@ -166,7 +168,7 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
               galleryTop.controller.control = galleryThumbs;
               galleryThumbs.controller.control = galleryTop;
             },0)
-
+    
     }
 
     $scope.return = function() {

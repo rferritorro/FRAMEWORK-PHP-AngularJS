@@ -89,41 +89,41 @@
   <div class="shop_table">
     <table>
         <tr>
-          <th>Marca</th>
-          <td>{{detail_car[0].brand_car}}</td>
-        </tr>
-        <tr style="background-color: grey">
-          <th>Modelo</th>
-          <td>{{detail_car[0].model_car}}</td>
-        </tr>
-        <tr>
-          <th>Motor</th>
+          <th><i class="fas fa-fire"></i></th>
           <td>{{detail_car[0].type}}</td>
-        </tr>
-        <tr>
-          <th>Estado</th>
+          <th><i class="fas fa-battery-half"></i></th>
           <td>{{detail_car[0].categories}}</td>
         </tr>
+
         <tr>
-          <th>Fecha</th>
+          <th><i class="fas fa-calendar-alt"></i></th>
           <td>{{detail_car[0].date}}</td>
+          <th><i class="fas fa-horse-head"></i></th>
+          <td>{{detail_car[0].CV}} CV</td>
         </tr>
+
         <tr>
-          <th>CV</th>
-          <td>{{detail_car[0].CV}}</td>
-        </tr>
-        <tr>
-          <th>Localidad</th>
+          <th><i class="fas fa-city"></i></th>
           <td>{{detail_car[0].ciudad}}</td>
+          <th><i class="fas fa-road"></i></th>
+          <td>{{detail_car[0].kilometres}} Km</td>
         </tr>
+
         <tr>
-          <th>Kilometros</th>
-          <td>{{detail_car[0].kilometres}}</td>
-        </tr>
-        <tr>
-          <th>Precio</th>
-          <td>{{detail_car[0].price}}</td>
+          <th><i class="fas fa-money-bill-wave"></i></th>
+          <td>{{detail_car[0].price}} €</td>
+          <th><i class="fas fa-brush"></i></th>
+          <td>{{detail_car[0].color}}</td>
         </tr>
     </table>
+  </div>
+  <div id="map_cars_detail"></div>
+  <div class="more_details">
+    <div class="tarjet_releated" ng-repeat="car in more_car">
+      <h5>{{car.att}}</h5>
+      <img src="frontend/{{car.img}}"/>
+      <i id={{car.id}} class="fas fa-eye btn btn-dark" ng-click="show_detail(car.id)"></i>
+      <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
+    </div>
   </div>
 </div>

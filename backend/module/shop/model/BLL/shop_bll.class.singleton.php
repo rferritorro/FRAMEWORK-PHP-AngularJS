@@ -47,6 +47,7 @@
 		public function get_all_likes_BLL($args) {
 			return $this -> dao -> charge_all_likes($this->db,$args[0]);
 		}
+		
         public function get_redirect_BLL($args) {
             return $this -> dao -> select_redirect($this->db,$args[0]);
         }

@@ -84,8 +84,21 @@
 
             return $occur;
         }
-        public function select_redirect($db,$brand) {
-            $sql = "SELECT id,img FROM cars WHERE brand_car ='$brand'";
+        public function select_redirect($db,$value) {
+           $id = $value["id"];
+            if ($value["tipo"]) {
+                $type = $value["tipo"];
+                $sql = "SELECT c.id,t.nom att,c.img FROM cars c INNER JOIN type t ON  c.type = t.id WHERE t.nom = '$type' AND c.id != '$id' LIMIT 0,4";
+            } else if ($value["marca"]) {
+
+                $brand = $value["marca"];
+                $sql = "SELECT id,brand_car att ,img FROM cars WHERE brand_car ='$brand' AND c.id != '$id' LIMIT 0,4";
+
+            } else if ($value["categoria"]) {
+                $categorie = $value["categoria"];
+                $sql = "SELECT c.id,cc.nom att ,c.img FROM cars c INNER JOIN categories cc ON  c.categories = cc.id WHERE cc.nom = '$categorie' AND c.id != '$id' LIMIT 0,4";
+            }
+
             $stmt = $db->ejecutar($sql);
             return $db->listar($stmt);
         }

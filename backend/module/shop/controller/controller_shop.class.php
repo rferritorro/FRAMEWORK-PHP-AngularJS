@@ -28,7 +28,7 @@ class controller_shop {
     // function userlikes() {
     //     echo json_encode(common::load_model('shop_model', 'get_all_likes',[$_POST["info_token"]]));
     // }
-    // function redireccionamiento() {
-    //     echo json_encode(common::load_model('shop_model', 'get_redirect',[$_POST["brand"]]));
-    // }
+    function redireccionamiento() {
+        echo json_encode(common::load_model('shop_model', 'get_redirect',[$_POST]));
+    }
 }

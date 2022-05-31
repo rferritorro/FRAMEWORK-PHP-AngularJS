@@ -8,12 +8,38 @@ body{
   line-height: 15px;
   background-color: black;
 }
+.more_details {
+  position: absolute;
+  top: 70%;
+  width: 70%;
+  margin-left: 10%;
+  display:flex;
+  flex-wrap: wrap;
+}
 .swiper {
   width: 70%;
   height: 300px;
   margin-top: 5%;
 }
 
+div.tarjet_releated {
+  background-color: black;
+  width: min-content;
+  margin: 20px;
+}
+div.tarjet_releated img {
+  width: 150px;
+  height: 100px;
+}
+div.tarjet_releated h5 {
+  background-color: red;
+  color: white;
+  border: 2px solid red;
+  border-radius: 25px;
+  position: absolute;
+  width: min-content;
+  top: 15%;
+}
 .swiper img {
   width: 300px;
   height: 300px;
@@ -35,13 +61,26 @@ body{
   position: absolute;
   margin-left: 10%;
 }
+
 .shop_table {
   height: auto;
   position: absolute;
-  right: 25%;
+  right: 15%;
+  width: 300px;
+  color: white;
+  background-color: #666;
+  border: 2px solid red;
 }
-.shop_table table tr {
-  margin: 100px 0px;
+.shop_table table th {
+  padding: 5px 30px;
+}
+#map_cars_detail {
+  width: 350px;
+  height: 250px;
+  background-color: aqua;
+  position: absolute;
+  right: 12%;
+  top: 30%;  
 }
 .swiper-shop {
   height: 400px;
