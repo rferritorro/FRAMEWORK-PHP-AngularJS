@@ -1,14 +1,14 @@
 app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop,service_filter,service_detail) {    
     localStorage.setItem('limit',0);
     localStorage.setItem('filter',JSON.stringify({}));
-  
-
+    
+    
     $rootScope.cars = Allcars[0];
     $scope.kilometres = [{id:1,value:"0-4999"},{id:2,value:"5000-9999"},{id:3,value:"10000-49999"},{id:4,value:"+50000"}]
     $scope.filters = DataFilters;
     $scope.body_details = true;
-
-
+    
+ 
     var filter_search = JSON.parse(localStorage.getItem('filter_search'))
 
     var filter_home = JSON.parse(localStorage.getItem('filter_home'))
@@ -137,7 +137,7 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         await service_map.map($rootScope.cars);
 
     }
-    $scope.show_detail = async function(id) {
+    $rootScope.show_detail = async function(id) {
 
         $scope.body_shop = true;
         $scope.body_details = false;

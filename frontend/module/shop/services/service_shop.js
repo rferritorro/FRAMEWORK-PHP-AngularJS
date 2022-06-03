@@ -37,6 +37,7 @@ app.factory('service_shop', ['services','service_map','$rootScope','toastr',func
 
                 if (response[1] > 0) {
                     $rootScope.cars = response[0];
+                    console.log($rootScope.cars)
                     service_map.map($rootScope.cars);
                     limite < 1 ? $rootScope.pag_left=false : $rootScope.pag_left=true;
     

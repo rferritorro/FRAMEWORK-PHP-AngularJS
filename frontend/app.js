@@ -38,7 +38,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 }]);
 
 app.run(function($rootScope,service_search){
- 
+ //Search
     service_search.type_search();
     service_search.categorie_search();
 
@@ -72,5 +72,12 @@ app.run(function($rootScope,service_search){
             window.location.href="#/shop"
         }
     }
-  
-});
+
+//Login
+    $rootScope.show_panel = () => {
+      $rootScope.show_panel_login = true
+    };
+    $rootScope.down_panel = () => {
+        $rootScope.show_panel_login = false
+    }
+}); 

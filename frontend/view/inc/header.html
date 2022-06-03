@@ -1,4 +1,5 @@
 <header>
+    <div class="black_layer" ng-show="show_panel_login"></div>
     <div class="container">
             <ul>
                 <li class="logo">
@@ -39,17 +40,40 @@
                     </datalist>
                     <button class="send_information_header" ng-click="send_information_shop(type_search.id,categorie_search.id)"><i class="fas fa-search fa-2x"></i></button>
                 </li>
-                <!-- <li class="panel_user">
-                    <div id="default_panel" class="default_panel_user">
-                    </div>
-                </li> -->
+                <li class="panel_user">
+                    <span class=" btn btn-dark" ng-click="show_panel()">Login In <i class="fas fa-user fa-2x"></i></span>
+                </li>
             </ul>
     </div>
+    <div ng-model="panel_login" ng-show="show_panel_login" id="panel_register">
+        <i ng-click="down_panel()" class="fas fa-times-circle btn btn-danger"></i>
+        <div id="login">
+            <h1>Login</h1>
+            <form id="login">
+                <input type="text" name="user" placeholder="Username" id="user"/><br>
+                <input type="password" name="password" placeholder="Password" id="password"/><br>
+                <div id="buttons_login">
+                    <input type="button" id="login_button" class="button_panel_register" value="Login" /><br>
+                    <input type="button" id="login_google" class="fa-input" value="&#xf1a0"/>
+                    <input type="button" id="login_github" class="fa-input" value="&#xf09b"/>
+                    <p id="remind">Don't remember your user?</p>
+                </div>
+            </form>
+        </div>
+        <div id="register">
+            <h1>Register</h1>
+            <form id="register">
+                <input type="text" placeholder="Username" name="username" id="username"/><br>
+                <input type="password" placeholder="Password" name="Password" id="Password"/><br>
+                <input type="password" placeholder="Confirm" name="confirm" id="confirm"/><br>
+                <input type="email" placeholder="Email" name="email" id="email"/><br>
+                <div id="buttons_login">
+                    <input type="button" id="register_button" class="button_panel_register" value="Register"/><br />
+                    <input type="button" id="register_google" class="fa-input" value="&#xf1a0"/>
+                    <input type="button" id="register_github" class="fa-input" value="&#xf09b"/>
+                </div>
+            </form>
+        </div>
+    </div>
 </header>
-<!-- <div id="panel_register" hidden>
-    <span id="user_login_close"><i class="fas fa-window-close fa-2x"></i></span>
-    <?php
-        include( Login_view . "/login.html");
-        include( Login_view . "/register.html");
-    ?>
-</div> -->
+
