@@ -50,10 +50,10 @@
         <div id="login">
             <h1>Login</h1>
             <form id="login">
-                <input type="text" name="user" placeholder="Username" id="user"/><br>
-                <input type="password" name="password" placeholder="Password" id="password"/><br>
+                <input type="text" name="user"  ng-model="login_user" ng-change="data_register(login_user,'user')" placeholder="Username" id="user"/><br>
+                <input type="password" name="password" ng-model="login_passwd" ng-blur="data_register(login_passwd,'passwd')" placeholder="Password" id="password"/><br>
                 <div id="buttons_login">
-                    <input type="button" id="login_button" class="button_panel_register" value="Login" /><br>
+                    <input type="button" id="login_button" ng-click="info_login(login_user,login_passwd)" class="button_panel_register" value="Login" /><br>
                     <input type="button" id="login_google" class="fa-input" value="&#xf1a0"/>
                     <input type="button" id="login_github" class="fa-input" value="&#xf09b"/>
                     <p id="remind">Don't remember your user?</p>
@@ -63,12 +63,12 @@
         <div id="register">
             <h1>Register</h1>
             <form id="register">
-                <input type="text" placeholder="Username" name="username" id="username"/><br>
-                <input type="password" placeholder="Password" name="Password" id="Password"/><br>
-                <input type="password" placeholder="Confirm" name="confirm" id="confirm"/><br>
-                <input type="email" placeholder="Email" name="email" id="email"/><br>
+                <input type="text" ng-model="register_user" ng-change="data_register(register_user,'user')" placeholder="Username" name="username"/><br>
+                <input type="password" ng-model="register_passwd"  ng-blur="data_register(register_passwd,'passwd')" placeholder="Password" name="Password" /><br>
+                <input type="password" ng-model="register_rpasswd" ng-blur="data_register(register_rpasswd,'rpasswd',register_passwd)" placeholder="Confirm" name="confirm" /><br>
+                <input type="text" ng-model="register_mail"  ng-blur="data_register(register_mail,'mail')" placeholder="Email" name="email" /><br>
                 <div id="buttons_login">
-                    <input type="button" id="register_button" class="button_panel_register" value="Register"/><br />
+                    <input type="button" ng-click="info_register(register_user,register_passwd,register_mail)" class="button_panel_register" value="Register"/><br />
                     <input type="button" id="register_google" class="fa-input" value="&#xf1a0"/>
                     <input type="button" id="register_github" class="fa-input" value="&#xf09b"/>
                 </div>

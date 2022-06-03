@@ -1,4 +1,4 @@
-app.factory('service_search', function(services,$rootScope,toastr) {
+app.factory('service_search', function(services,$rootScope) {
     let service = {type_search:type_search,categorie_search:categorie_search,change_categorie:change_categorie,city_search:city_search};
     return service;
 

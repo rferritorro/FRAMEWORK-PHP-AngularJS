@@ -1,4 +1,4 @@
-var app = angular.module('Proyecto_V.5-RafaFerri', ['ngRoute', 'toastr']);
+var app = angular.module('Proyecto_V.5-RafaFerri', ['ngRoute','toastr']);
 
 app.config(['$routeProvider', function ($routeProvider) {
     $routeProvider
@@ -37,13 +37,14 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.run(function($rootScope,service_search){
- //Search
+app.run(function($rootScope,service_search,service_regex, service_register,toastr){
+    //Search
     service_search.type_search();
     service_search.categorie_search();
-
+    
     $rootScope.change_type = function(data){
         service_search.change_categorie(data);
+        toastr.info("hola")
     }
 
     $rootScope.find_city_search = function(type,categorie,city){
@@ -74,10 +75,30 @@ app.run(function($rootScope,service_search){
     }
 
 //Login
+    //variables register
+    $rootScope.check_register_user = false
+    $rootScope.check_register_passwd = false
+    $rootScope.check_register_repasswd = false
+    $rootScope.check_register_mail = false
+
+
     $rootScope.show_panel = () => {
       $rootScope.show_panel_login = true
     };
     $rootScope.down_panel = () => {
         $rootScope.show_panel_login = false
+    }
+    
+    //Send information
+    $rootScope.info_register = (user,passwd,mail) => {
+       service_register.register(user,passwd,mail);
+    }
+    $rootScope.info_login = (user,passwd) => {
+        console.log(user,passwd)
+    }
+
+    //check regex
+    $rootScope.data_register = function(value,event,passwd){
+        service_regex.regex_register(value,event,passwd);
     }
 }); 

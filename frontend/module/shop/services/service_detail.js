@@ -1,4 +1,4 @@
-app.factory('service_detail', function(services,$rootScope,service_map,toastr) {
+app.factory('service_detail', function(services,$rootScope,service_map) {
     let service = {show_detail: show_detail,more_details:more_details};
     return service;
     function show_detail(id) {

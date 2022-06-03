@@ -1,7 +1,7 @@
 app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop,service_filter,service_detail) {    
+    
     localStorage.setItem('limit',0);
     localStorage.setItem('filter',JSON.stringify({}));
-    
     
     $rootScope.cars = Allcars[0];
     $scope.kilometres = [{id:1,value:"0-4999"},{id:2,value:"5000-9999"},{id:3,value:"10000-49999"},{id:4,value:"+50000"}]
@@ -82,8 +82,8 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         $route.reload();
         window.location.reload();
     }
-    $scope.filtrado = async function(data = undefined) {  
-
+    
+    $scope.filtrado = async function(data = undefined) {
         var filtros = JSON.parse(localStorage.getItem('filter'))
   
         if (this.brands) {
@@ -177,73 +177,3 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
 
     }
 })
-
-function map(lat,long,ciudad) {
-
-    mapboxgl.accessToken = '';
-        var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center:[long,lat],
-        zoom: 12
-});
-map.addControl(new mapboxgl.NavigationControl());
-
-var geojson = {
-
-    type: 'FeatureCollection',
-    features: [{
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [long,lat]
-        },
-        properties: {
-            title: ciudad,
-        }
-    }]
-};
-geojson.features.forEach(function(marker) {
-
-  var el = document.createElement('div');
-  el.className = "marker";
-  new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .setPopup(
-        new mapboxgl.Popup({ offset: 25 }) // add popups
-        .setHTML( 
-            `<h4>${marker.properties.title}</h4>`          )
-      )
-    .addTo(map);    
-    });
-}
-// Function map which is list,it's array
-
-function map_array(array) {
-    mapboxgl.accessToken = 'pk.eyJ1IjoicmVpZjQwMCIsImEiOiJja3p6ZWlmYWYwMDM4M2NxYTI0aGJrZjU5In0.pnTWl4oodCv8Edjbw-n6aA';
-    var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/mapbox/streets-v11',
-    center:[-0.6166700 , 38.8166700],
-    zoom: 9
-});
-map.addControl(new mapboxgl.NavigationControl());
-
-var newstring = [];
-
-for ( var i in array) {
-    newstring.push({
-        type: 'Feature',
-        geometry: 
-            {
-                type: 'Point',
-                coordinates: [array[i].long,array[i].lat]
-            },
-        properties: {
-                title:array[i].city,
-                img: array[i].img
-            }
-        }
-    )
-}
-}

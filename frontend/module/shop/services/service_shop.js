@@ -47,8 +47,7 @@ app.factory('service_shop', ['services','service_map','$rootScope','toastr',func
                     
                     parseFloat(limite)+4 > response[1] ? $rootScope.pag_right=true : $rootScope.pag_right=false;
                 } else {
-                    toastr.info("There aren't cars with this filters")
-                    console.log("no hay")
+                    toastr.error("There aren't cars with this filters")
                 }
 
 
