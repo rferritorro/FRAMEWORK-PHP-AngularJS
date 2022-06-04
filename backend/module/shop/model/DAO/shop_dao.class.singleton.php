@@ -200,10 +200,9 @@
         }
         function change_like($db,$car_id,$color,$token) {
             $username = middleware_auth::decode_jwt($token);
-
-            if ( $color == 0) {
+            if ( $color == 1) {
                 $sql = "INSERT INTO `like`(user,car) VALUES ('$username','$car_id')";
-            } else if ( $color == 1) {
+            } else if ( $color == 0) {
                 $sql = "DELETE FROM `like` WHERE user='$username' AND car='$car_id'";
             } else {
                 return "error";

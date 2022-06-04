@@ -1,18 +1,34 @@
-app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,service_map,service_shop,service_filter,service_detail) {    
+app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,DataFilters,ChargeAllLikes,service_map,service_shop,service_filter,service_like,service_detail,toastr) {    
     
-    localStorage.setItem('limit',0);
-    localStorage.setItem('filter',JSON.stringify({}));
+    if (!localStorage.getItem('limit')) {
+        localStorage.setItem('limit',0);
+    }
+    var highlight = JSON.parse(localStorage.getItem('filter')) 
+    if (!highlight) {
+       localStorage.setItem('filter',JSON.stringify({}));
+    } else {
+        service_filter.resolve_filters(highlight);
+        if (highlight.marca){$scope.brands = highlight.marca}
+        if (highlight.modelo){$scope.model_data = highlight.modelo}
+        if (highlight.tipo){$scope.type_data = highlight.tipo}
+        if (highlight.primer_precio){$scope.first_number = highlight.primer_precio}
+        if (highlight.segundo_precio){$scope.second_number = highlight.second_number}
+        if (highlight.kilometros){$scope.kilometre_data = highlight.kilometros}
+        if (highlight.categoria){$scope.categorie_data = highlight.categoria}
+    }
+
+
     
     $rootScope.cars = Allcars[0];
+    $rootScope.likes = ChargeAllLikes
     $scope.kilometres = [{id:1,value:"0-4999"},{id:2,value:"5000-9999"},{id:3,value:"10000-49999"},{id:4,value:"+50000"}]
     $scope.filters = DataFilters;
     $scope.body_details = true;
     
- 
+    
     var filter_search = JSON.parse(localStorage.getItem('filter_search'))
 
     var filter_home = JSON.parse(localStorage.getItem('filter_home'))
-
     if (filter_search && $scope.filters) {
 
         var filtros = JSON.parse(localStorage.getItem('filter'))
@@ -94,7 +110,7 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
             filtros.modelo = this.model_data;
         }
         if (this.kilometre_data) {
-            filtros.kilometros = this.kilometre_data.id;
+            filtros.kilometros = this.kilometre_data;
         }
 
         if (this.first_number) {
@@ -175,5 +191,9 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         $scope.body_details = true;
         $rootScope.header = false;
 
+    }
+
+    $scope.put_like = function(carid) {
+        service_like.like_dislike(carid)
     }
 })

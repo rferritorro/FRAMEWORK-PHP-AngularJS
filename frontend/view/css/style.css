@@ -1,4 +1,5 @@
-html {font-size: 100%;}
+html {font-size: 100%;  overflow:auto;
+}
 
 body{
   color: #666;
@@ -306,12 +307,18 @@ li.search_inputs i, li.search_inputs select , li.search_inputs_text input {
   padding: 25%;
 }
 div.black_layer {
+  position: fixed;
   background-color: black;
-  opacity: 0.4;
-  z-index: 149;
+  opacity: 0.3;
+  z-index: 150;
   width: 100%;
   height: 100%;
-  position: absolute;
+}
+div.leaflet-top {
+  z-index: 148;
+}
+div.leaflet-bottom {
+  z-index: 148;
 }
 div#panel_register {
   width: 60%;
@@ -319,7 +326,7 @@ div#panel_register {
   background-image: url('../img/fondo_login.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  z-index: 150;
+  z-index: 151;
   position: fixed;
   top:20%;
   color: white;
@@ -336,6 +343,10 @@ div#panel_register input {
   margin: 2% 0%;
   width: 45%;
   padding: 1%;
+}
+div#panel_register i {
+  position: absolute;
+  right: 0%;
 }
 div#panel_register input#register_google,div#panel_register input#login_google {
   background-color: #db4a39;

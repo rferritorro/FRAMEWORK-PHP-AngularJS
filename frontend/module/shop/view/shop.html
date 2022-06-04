@@ -12,13 +12,14 @@
       </ul>
     </nav>
           <div class="card" ng-repeat="car in cars" style="width: 18rem;">
+              <i id="{{car.id}}like" on="0" style="position: absolute;color: black;margin: 5px" class="fas fa-heart fa-2x"></i>
               <img src="frontend/{{car.img}}" class="card-img-top">
               <div class="card-body">
                 <h2 class="card-title">{{car.brand_car}}  {{car.model_car}}</h2>
                 <h3>{{car.kilometres}} km</h3>
                 <h3>{{car.price}} €</h3>
                 <i id={{car.id}} class="fas fa-eye btn btn-dark" ng-click="show_detail(car.id)"></i>
-                <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
+                <i id={{car.id}} class="fas fa-heart btn btn-danger" ng-click="put_like(car.id)"></i>
               </div>
           </div>
   </div>
@@ -35,7 +36,8 @@
         <option value="{{model.id}}" ng-repeat="model in modelos">{{model.model_car}}</option>
       </select>
       <h1>Kilometros</h1>
-      <select ng-model="kilometre_data"  ng-change="filtrado()" ng-options="kilometre.value for kilometre in kilometres">
+      <select ng-model="kilometre_data"  ng-change="filtrado()">
+        <option value="{{kilometre.id}}" ng-repeat="kilometre in kilometres">{{kilometre.value}}</option>
       </select>
     <h1>Precio</h1>
       <div>
@@ -62,7 +64,7 @@
 </div>
 <div ng-hide="body_details">
   <i class="far fa-caret-square-left fa-2x btn-dark" ng-click="return()"></i>
-  <h1>{{detail_car[0].brand_car}} {{detail_car[0].model_car}}</h1>
+  <h1>{{detail_car[0].brand_car}} {{detail_car[0].model_car}} <i id="{{detail_car[0].id}}detail_like" on="0" style="position: absolute;color: black;margin: 5px" class="fas fa-heart"></i></h1>
   <div class="swiper_box">
     <div class="swiper-shop">
       <!-- Additional required wrapper -->

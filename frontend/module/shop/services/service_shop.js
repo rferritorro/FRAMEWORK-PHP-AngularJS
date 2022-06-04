@@ -1,4 +1,4 @@
-app.factory('service_shop', ['services','service_map','$rootScope','toastr',function(services,service_map,$rootScope,toastr) {
+app.factory('service_shop', ['services','service_map','service_like','$rootScope','toastr',function(services,service_map,service_like,$rootScope,toastr) {
     let service = {charge_model: charge_model,filtrar:filtrar};
     return service;
 
@@ -22,6 +22,8 @@ app.factory('service_shop', ['services','service_map','$rootScope','toastr',func
 
                 $rootScope.cars = response[0];
                 service_map.map($rootScope.cars);
+
+                service_like.charge_all_likes();
                 limite < 1 ? $rootScope.pag_left=false : $rootScope.pag_left=true;
 
                 8 < response[1] ? $rootScope.pag_3=false : $rootScope.pag_3=true;
@@ -39,6 +41,9 @@ app.factory('service_shop', ['services','service_map','$rootScope','toastr',func
                     $rootScope.cars = response[0];
                     console.log($rootScope.cars)
                     service_map.map($rootScope.cars);
+
+                    service_like.charge_all_likes();
+
                     limite < 1 ? $rootScope.pag_left=false : $rootScope.pag_left=true;
     
                     4 < response[1] ? $rootScope.pag_2=false : $rootScope.pag_2=true;
@@ -54,7 +59,9 @@ app.factory('service_shop', ['services','service_map','$rootScope','toastr',func
             }, function(error) {
                 console.log(error);
             });
+
+
         }
-        
+
     }
 }]);

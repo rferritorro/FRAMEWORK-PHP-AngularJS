@@ -5,6 +5,14 @@ app.factory('service_detail', function(services,$rootScope,service_map) {
         return services.post('shop', 'detail_car', {id: id})
         .then(function(response) {
          $rootScope.detail_car = response;
+
+        var checklike = document.getElementById(id+'like').getAttribute('on')
+        
+        setTimeout(() => {
+            var putlike = document.getElementById(id+'detail_like')
+            checklike == 1 ? putlike.style.color = '#dc3545' : putlike.style.color = 'black'
+        },50)  
+
         service_map.map_detail($rootScope.detail_car);
         }, function(error) {
             console.log(error);

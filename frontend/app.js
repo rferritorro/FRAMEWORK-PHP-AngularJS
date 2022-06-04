@@ -29,6 +29,9 @@ app.config(['$routeProvider', function ($routeProvider) {
                 },
                 DataFilters: function (services) {
                     return services.post('shop','charge_filters');
+                },
+                ChargeAllLikes: function (services) {
+                    return services.post('shop','charge_all_likes',{info_token:localStorage.token});
                 }
         }})
         .when("/contact", {
@@ -43,10 +46,16 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 app.run(function($rootScope,service_search,service_regex,service_login,service_register,toastr){
     //Search
+     
     if (localStorage.token) {
         $rootScope.modal_login = true
         $rootScope.panel_user_small = true
         service_login.charge_user(localStorage.token)
+        if (localStorage.positionY) {
+            var y = localStorage.positionY;
+            setTimeout(function () {window.scrollTo(0,y)},200); 
+            localStorage.removeItem('positionY'); 
+        }
     }
     
     

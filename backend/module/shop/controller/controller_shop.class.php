@@ -18,16 +18,12 @@ class controller_shop {
         echo json_encode(common::load_model('shop_model', 'get_detail',[$_POST["id"]]));
     }
 
-    // function count() {
-    //     echo json_encode(common::load_model('shop_model', 'get_count'));
-    // }
-
-    // function like() {
-    //     echo json_encode(common::load_model('shop_model', 'get_like',[$_POST["info-id"],$_POST["info-color"],$_POST["token"]]));
-    // }
-    // function userlikes() {
-    //     echo json_encode(common::load_model('shop_model', 'get_all_likes',[$_POST["info_token"]]));
-    // }
+    function like() {
+        echo json_encode(common::load_model('shop_model', 'get_like',[$_POST["info_id"],$_POST["info_color"],$_POST["token"]]));
+    }
+    function userlikes() {
+        echo json_encode(common::load_model('shop_model', 'get_all_likes',[$_POST["info_token"]]));
+    }
     function redireccionamiento() {
         echo json_encode(common::load_model('shop_model', 'get_redirect',[$_POST]));
     }
