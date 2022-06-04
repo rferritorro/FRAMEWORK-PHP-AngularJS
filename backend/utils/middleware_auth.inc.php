@@ -1,7 +1,6 @@
 <?php
 class middleware_auth {
     public static function decode_jwt($token,$option = 0) {
-
         $ini_array = parse_ini_file(Utils . 'secret.ini');
         
         require_once Model . 'jwt.class.php';
@@ -11,7 +10,7 @@ class middleware_auth {
         
         $JWT = new JWT;
         
-        $json = $JWT->decode($token, $secret);  
+        $json = $JWT->decode(trim($token,'"'), $secret);  
         $json = json_decode($json, true);
 
         if ($option == 1) {

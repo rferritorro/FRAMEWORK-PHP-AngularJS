@@ -195,15 +195,20 @@ p {
   transform: skewX(30deg);
   
 }
-div.default_panel_user img {
-  width: 100px;
-  height: 100px;
+li.panel_user span.panel_login {
+  z-index: 150;
+  position: absolute;
+}
+li.panel_user span.panel_login img {
+  width: 90px;
+  height: 90px;
   border: 5px solid white;
   border-radius: 40px;
 }
-div.default_panel_user h3 {
-  margin: 0px;
-  padding: 0px;
+li.panel_user span.panel_login div{
+  position: absolute;
+  top: 0%;
+  right: -60%;
 }
 .container ul li.panel_user div.default_panel_user h3 {
   margin-left: 10%;

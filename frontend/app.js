@@ -16,6 +16,10 @@ app.config(['$routeProvider', function ($routeProvider) {
                 return services.get('home','menu_categories');
             }}
         })
+        .when("/home/:type/:token", {
+            templateUrl: "frontend/module/home/view/home.html", 
+            controller: "controller_home"
+        })
         .when("/shop", {
             templateUrl: "frontend/module/shop/view/shop.html", 
             controller: "controller_shop",
@@ -37,8 +41,15 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.run(function($rootScope,service_search,service_regex, service_register,toastr){
+app.run(function($rootScope,service_search,service_regex,service_login,service_register,toastr){
     //Search
+    if (localStorage.token) {
+        $rootScope.modal_login = true
+        $rootScope.panel_user_small = true
+        service_login.charge_user(localStorage.token)
+    }
+    
+    
     service_search.type_search();
     service_search.categorie_search();
     
@@ -81,6 +92,11 @@ app.run(function($rootScope,service_search,service_regex, service_register,toast
     $rootScope.check_register_repasswd = false
     $rootScope.check_register_mail = false
 
+    $rootScope.logout = () => {
+        toastr.warning("User log out")
+        localStorage.removeItem('token')
+        setTimeout(() => {window.location.reload()},1500)
+    }
 
     $rootScope.show_panel = () => {
       $rootScope.show_panel_login = true
@@ -94,11 +110,21 @@ app.run(function($rootScope,service_search,service_regex, service_register,toast
        service_register.register(user,passwd,mail);
     }
     $rootScope.info_login = (user,passwd) => {
-        console.log(user,passwd)
+        service_login.login(user,passwd)
     }
 
     //check regex
     $rootScope.data_register = function(value,event,passwd){
         service_regex.regex_register(value,event,passwd);
     }
+
+    //Path
+
+    var path = location.href.split("/")
+    
+  if (path[6] == 'registered') {
+      service_register.confirm_register(path[7])
+  }
+
+   
 }); 

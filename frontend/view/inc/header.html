@@ -41,7 +41,8 @@
                     <button class="send_information_header" ng-click="send_information_shop(type_search.id,categorie_search.id)"><i class="fas fa-search fa-2x"></i></button>
                 </li>
                 <li class="panel_user">
-                    <span class=" btn btn-dark" ng-click="show_panel()">Login In <i class="fas fa-user fa-2x"></i></span>
+                    <span ng-hide="modal_login" class=" btn btn-dark" ng-click="show_panel()">Login In <i class="fas fa-user fa-2x"></i></span>
+                    <span class="panel_login" ng-show="panel_user_small" ng-repeat="usuario in user"><img src="{{usuario.avatar}}"/><div><i ng-click="logout()" class="fas fa-sign-out-alt  btn btn-danger"></i></br><i class="fas fa-user-cog btn btn-dark"></i></div></span>
                 </li>
             </ul>
     </div>

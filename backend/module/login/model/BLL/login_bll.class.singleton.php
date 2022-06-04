@@ -27,7 +27,7 @@
 			return $this -> dao -> select_logg_user($this->db,$args[0],$args[1]);
 		}
 		public function get_charge_user_BLL($args) {
-			return $this -> dao -> select_charge_user($this->db,$args[0]);
+			return $this -> dao -> select_charge_user($this->db,$args);
 		}
 		public function get_check_mail_BLL($args) {
 			return $this -> dao -> select_check_mail($this->db,$args[0]);

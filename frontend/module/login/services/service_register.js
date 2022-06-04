@@ -1,5 +1,5 @@
 app.factory('service_register', function($rootScope,services,toastr) {
-    let service = {register:register};
+    let service = {register:register,confirm_register:confirm_register};
     return service;
 
     function register(user,passwd,mail) {
@@ -26,5 +26,17 @@ app.factory('service_register', function($rootScope,services,toastr) {
         $rootScope.check_register_repasswd == false ? toastr.error("Confirm Passord ins't correct") : ""
         $rootScope.check_register_mail == false ? toastr.error("Email ins't correct") : ""
   }
+    }
+
+    function confirm_register(token) {
+        services.post('register', 'newuser', {token: token})
+        .then(function(response) {
+            setTimeout(() => {
+                response ? toastr.success("User has been registered") : toastr.error("An error has ocurred") 
+            },1500)
+            window.location.href="#/home"
+        }, function(error) {
+            console.log(error);
+        });
     }
 })

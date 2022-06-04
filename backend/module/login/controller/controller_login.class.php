@@ -22,7 +22,7 @@ class controller_login {
     }
 
     function chargeuser() {
-      echo json_encode(common::load_model('login_model', 'get_charge_user',[$_POST["token"]]));
+      echo json_encode(common::load_model('login_model', 'get_charge_user',$_POST["token"]));
     }
     function checkermail() {
       echo json_encode(common::load_model('login_model', 'get_check_mail',[$_POST["email"]]));

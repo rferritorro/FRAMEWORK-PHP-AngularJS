@@ -80,7 +80,6 @@
 
         }
         function select_charge_user($db,$token) {
-
             $username = middleware_auth::decode_jwt($token);
             $sql = "SELECT username,avatar,uid FROM User WHERE username = '$username'";
             $stmt = $db->ejecutar($sql);
