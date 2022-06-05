@@ -34,7 +34,17 @@ app.factory('service_detail', function(services,$rootScope,service_map) {
         return services.post('shop', 'get_redirect', data)
 
         .then(function(response) {
+
             $rootScope.more_car = response;
+            setTimeout(()=>{
+                $rootScope.likes.map(function(car){
+                    var darlike = document.getElementById(car.car+'more_detail_like')
+                    if (darlike != null) {
+                        darlike.setAttribute("on",1)
+                        darlike.style.color=  "#dc3545"
+                    }
+                    })
+            },50)
         }, function(error) {
             console.log(error);
         });

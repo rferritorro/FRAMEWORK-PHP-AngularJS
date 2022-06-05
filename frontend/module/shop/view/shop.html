@@ -125,10 +125,10 @@
 
   <div class="more_details">
     <div class="tarjet_releated" ng-repeat="car in more_car">
-      <h5>{{car.att}}</h5>
+      <h5>{{car.att}}    <i id="{{car.id}}more_detail_like" on="0" style="position:absolute;color: black;right: -50%;" class="fas fa-heart"></i></h5>
       <img src="frontend/{{car.img}}"/>
       <i id={{car.id}} class="fas fa-eye btn btn-dark" ng-click="show_detail(car.id)"></i>
-      <i id={{car.id}} class="fas fa-heart btn btn-danger"></i>
+      <i id={{car.id}} class="fas fa-heart btn btn-danger" ng-click="like_dislike_detail(car.id)"></i>
     </div>
   </div>
   

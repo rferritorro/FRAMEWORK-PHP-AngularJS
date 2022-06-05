@@ -1,5 +1,5 @@
 app.factory('service_like', function($rootScope,toastr,services) {
-    let service = {charge_all_likes:charge_all_likes,like_dislike:like_dislike};
+    let service = {charge_all_likes:charge_all_likes,like_dislike:like_dislike,put_like_detail:put_like_detail};
     return service;
     function charge_all_likes() {
         setTimeout(()=>{ 
@@ -42,5 +42,27 @@ app.factory('service_like', function($rootScope,toastr,services) {
             localStorage.setItem('positionY',window.scrollY);
             setTimeout(()=>{document.getElementById('button_panel_user').click()},1500)
         }
+    }
+    function put_like_detail(id) {
+        var token = localStorage.getItem('token')
+
+        var detail_car = document.getElementById(id+'more_detail_like')
+        var color;
+        if (detail_car.getAttribute("on") == 0) {
+            detail_car.style.color = "#dc3545"
+            color = 1;
+            detail_car.setAttribute("on",color)
+        } else {
+            detail_car.style.color = "black";
+            color = 0;
+            detail_car.setAttribute("on",color)
+        }
+        services.post('shop', 'like', {info_id: id,info_color: color,token: token})
+        .then(function(response) {
+            console.log(response)
+        }, function(error) {
+            console.log(error);
+        });
+
     }
 })

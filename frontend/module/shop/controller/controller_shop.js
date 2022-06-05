@@ -153,8 +153,12 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
         await service_map.map($rootScope.cars);
 
     }
+    $rootScope.like_dislike_detail = function(id) {
+        service_like.put_like_detail(id)
+    }
     $rootScope.show_detail = async function(id) {
-
+        var token = localStorage.getItem('token')
+        if (token) {
         $scope.body_shop = true;
         $scope.body_details = false;
         $rootScope.header = true;
@@ -182,7 +186,11 @@ app.controller('controller_shop', function($scope,$route,$rootScope,Allcars,Data
               galleryTop.controller.control = galleryThumbs;
               galleryThumbs.controller.control = galleryTop;
             },0)
-    
+        } else {
+            toastr.error("You need login first")
+            localStorage.setItem('positionY',window.scrollY);
+            setTimeout(()=>{document.getElementById('button_panel_user').click()},1500)
+        }
     }
 
     $scope.return = function() {
