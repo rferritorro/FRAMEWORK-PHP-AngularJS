@@ -123,7 +123,7 @@
             $row_select = $stmt->num_rows;
             if ($row_select == 0) {
                 $uid= common::generate_token_secure(4);
-                if ($type == "google") {
+                if ($type == "google-oauth2") {
                     $uid = "G-". $uid;
                 } else if ($type == "github") {
                     $uid = "git-". $uid;

@@ -28,10 +28,10 @@ class controller_login {
       echo json_encode(common::load_model('login_model', 'get_check_mail',[$_POST["email"]]));
     }
     function socialregister() {
-      echo json_encode(common::load_model('login_model', 'get_social_register',[$_POST["nickname"],$_POST["email"],$_POST["sub"],$_POST["type"]]));
+      echo json_encode(common::load_model('login_model', 'get_social_register',[$_POST["profile"]["nickname"],$_POST["profile"]["email"],$_POST["profile"]["sub"],$_POST["profile"]["type"]]));
     }
     function sociallogin() {
-      echo json_encode(common::load_model('login_model', 'get_social_login',[$_POST["sub"]]));
+      echo json_encode(common::load_model('login_model', 'get_social_login',[$_POST["profile"]["sub"]]));
     }
     function setnewpassword() {
       echo json_encode(common::load_model('login_model', 'get_set_new_password',[$_POST["password"],$_POST["token"]]));

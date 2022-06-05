@@ -44,9 +44,8 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.run(function($rootScope,service_search,service_regex,service_login,service_register,toastr){
+app.run(function($rootScope,service_search,service_regex,service_login,service_auth0,service_register,service_social_register,toastr){
     //Search
-     
     if (localStorage.token) {
         $rootScope.modal_login = true
         $rootScope.panel_user_small = true
@@ -96,6 +95,8 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_r
 
 //Login
     //variables register
+    service_auth0.auth_logg();
+
     $rootScope.check_register_user = false
     $rootScope.check_register_passwd = false
     $rootScope.check_register_repasswd = false
@@ -106,12 +107,15 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_r
         localStorage.removeItem('token')
         setTimeout(() => {window.location.reload()},1500)
     }
-
     $rootScope.show_panel = () => {
       $rootScope.show_panel_login = true
     };
     $rootScope.down_panel = () => {
         $rootScope.show_panel_login = false
+    }
+    $rootScope.social_login = (event,type) => {
+        service_social_register.social_register(type)
+        localStorage.setItem('mode',event)
     }
     
     //Send information
@@ -130,10 +134,14 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_r
     //Path
 
     var path = location.href.split("/")
-    
+
   if (path[6] == 'registered') {
       service_register.confirm_register(path[7])
   }
+    var social_path = path[4].split("=")[0]
+    
+    if (social_path == '#access_token') {
+        service_social_register.check_info_register()
+    }
 
-   
 }); 
