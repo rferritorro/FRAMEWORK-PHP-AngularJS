@@ -42,13 +42,17 @@
                 </li>
                 <li class="panel_user">
                     <span id="button_panel_user" ng-hide="modal_login" class=" btn btn-dark" ng-click="show_panel()">Login In <i class="fas fa-user fa-2x"></i></span>
-                    <span class="panel_login" ng-show="panel_user_small" ng-repeat="usuario in user"><img src="{{usuario.avatar}}"/><div><i ng-click="logout()" class="fas fa-sign-out-alt  btn btn-danger"></i></br><i class="fas fa-user-cog btn btn-dark"></i></div></span>
+                    <span class="panel_login" ng-show="panel_user_small" ng-repeat="usuario in user"><img src="{{usuario.avatar}}"/><div><i ng-click="logout()" class="fas fa-sign-out-alt  btn btn-danger"></i></br><i ng-click="show_profile()" class="fas fa-user-cog btn btn-dark"></i></div></span>
+                    <div ng-show="profile" style="position: fixed;bottom: -80%;" ng-repeat="usuario in user">
+                        <h2 style="transform: skewX(30deg)">{{usuario.username}} <i class={{usuario.icon}}></i></h2>
+                    </div>
                 </li>
             </ul>
+           
     </div>
     <div ng-model="panel_login" ng-show="show_panel_login" id="panel_register">
         <i ng-click="down_panel()" class="fas fa-times-circle btn btn-danger"></i>
-        <div id="login">
+        <div id="login" ng-hide="login_charge_model">
             <h1>Login</h1>
             <form id="login">
                 <input type="text" name="user"  ng-model="login_user" ng-change="data_register(login_user,'user')" placeholder="Username" id="user"/><br>
@@ -57,9 +61,21 @@
                     <input type="button" id="login_button" ng-click="info_login(login_user,login_passwd)" class="button_panel_register" value="Login" /><br>
                     <input type="button" id="login_google" class="fa-input" ng-click="social_login('login','google-oauth2')" value="&#xf1a0"/>
                     <input type="button" id="login_github" class="fa-input" ng-click="social_login('login','github')" value="&#xf09b"/>
-                    <p id="remind">Don't remember your user?</p>
+                    <p ng-click="charge_panel_password(0)" id="remind">Don't remember your user?</p>
                 </div>
             </form>
+        </div>
+        <div ng-show="Verify_email" style="position: absolute;width: 50%;height: 100%;text-align: center;top:20%">
+            <i ng-click="charge_panel_password(1)" class="fas fa-caret-square-left btn btn-danger"></i>
+            <h1>Verify Email</h1>
+            <input type="text" ng-model="text_mail" ng-blur="check_mail(text_mail)" placeholder="Email" /><br>
+            <input type="button" ng-click="verify_mail_to_change_password()"  style="color: white;background-color:red ;"value="Verify Email" /><br>
+        </div>
+        <div ng-show="panel_password" style="position: absolute;width: 50%;height: 100%;text-align: center;top:20%">
+            <h1>Change Password</h1>
+            <input type="password" ng-model="change_passwd" ng-blur="confirm_password(change_passwd)" placeholder="Password"/><br>
+            <input type="password" ng-model="rechange_passwd" ng-blur="confirm_password(change_passwd,rechange_passwd)" placeholder="Confirm"/><br>
+            <input type="button" ng-click="change_new_password(change_passwd)"  style="color: white;background-color:red ;"value="Verify Email" /><br>
         </div>
         <div id="register">
             <h1>Register</h1>

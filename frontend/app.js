@@ -44,7 +44,7 @@ app.config(['$routeProvider', function ($routeProvider) {
         });
 }]);
 
-app.run(function($rootScope,service_search,service_regex,service_login,service_auth0,service_register,service_social_register,toastr){
+app.run(function($rootScope,service_search,service_regex,service_login,service_auth0,service_register,service_social_register,service_recover_passwd,toastr){
     //Search
     if (localStorage.token) {
         $rootScope.modal_login = true
@@ -63,7 +63,12 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_a
     
     $rootScope.change_type = function(data){
         service_search.change_categorie(data);
-        toastr.info("hola")
+    }
+
+    $rootScope.show_profile = () => {
+        var icon = $rootScope.user[0].uid.split("-")[0];
+        icon == "G" ?  $rootScope.user[0].icon = 'fab fa-google btn btn-success' :  $rootScope.user[0].icon ='fab fa-github btn btn-warning'
+        $rootScope.profile = true
     }
 
     $rootScope.find_city_search = function(type,categorie,city){
@@ -101,6 +106,42 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_a
     $rootScope.check_register_passwd = false
     $rootScope.check_register_repasswd = false
     $rootScope.check_register_mail = false
+    $rootScope.verify_dinamic_mail = false
+    $rootScope.check_repasswd = false 
+
+    $rootScope.charge_panel_password = (type) => {
+        if (type == 0) {
+            $rootScope.login_charge_model=true
+            $rootScope.Verify_email =true
+        } else {
+            $rootScope.login_charge_model=false
+            $rootScope.Verify_email =false
+        }
+    }
+
+    $rootScope.confirm_password = (passwd,rpasswd) => {
+        service_regex.change_password_regex(passwd,rpasswd)
+    }
+
+    $rootScope.change_new_password = (passwd) => {
+        if ($rootScope.check_repasswd) {
+
+            service_recover_passwd.change_password(passwd)
+
+        } else {
+            toastr.error("Passwords aren't correct")
+        }
+    }
+
+    $rootScope.check_mail = (value) => {
+        $rootScope.emailverify = value
+        service_recover_passwd.check_mail_regex(value)
+    }
+
+    $rootScope.verify_mail_to_change_password = () => {
+       $rootScope.verify_dinamic_mail ? service_recover_passwd.send_mail_for_recover() : toastr.error("Email is invalid")
+    }
+
 
     $rootScope.logout = () => {
         toastr.warning("User log out")
@@ -137,6 +178,11 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_a
 
   if (path[6] == 'registered') {
       service_register.confirm_register(path[7])
+  }
+
+  if (path[6] == 'recover') {
+    $rootScope.token_user = path[7]
+    service_recover_passwd.show_panel_password()
   }
     var social_path = path[4].split("=")[0]
     

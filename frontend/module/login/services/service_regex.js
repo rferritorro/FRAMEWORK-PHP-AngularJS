@@ -1,5 +1,5 @@
 app.factory('service_regex', function($rootScope,toastr) {
-    let service = {regex_register:regex_register};
+    let service = {regex_register:regex_register,change_password_regex:change_password_regex};
     return service;
 
 function regex_register(value,event,rpasswd = undefined) {
@@ -40,5 +40,18 @@ function regex_register(value,event,rpasswd = undefined) {
         $rootScope.check_register_mail = false
         toastr.error("Format email isn't correct")
     }  }
+}
+
+function change_password_regex(passwd,rpasswd = undefined) {
+    var ppaswd = /^[A-Za-z][A-Za-z0-9_]{2,20}$/;
+
+    if (passwd) {
+       if (!ppaswd.test(passwd) ) {
+            toastr.error("Password ins't correct format")
+       }
+    }
+    if (rpasswd) {
+        passwd == rpasswd ? $rootScope.check_repasswd = true : toastr.error("Password and Confirm Passwrod aren't the same")
+    }
 }
 });

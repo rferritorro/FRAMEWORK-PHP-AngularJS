@@ -102,7 +102,7 @@
             }
 
         }
-        function select_new_password($db,$password,$token,$type) {
+        function select_new_password($db,$password,$token) {
             $sql = "SELECT * FROM User WHERE token = '$token' AND activate = 0";
             $stmt = $db->ejecutar($sql);
            
