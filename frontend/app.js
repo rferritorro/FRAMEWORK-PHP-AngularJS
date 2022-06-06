@@ -56,8 +56,15 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_a
             localStorage.removeItem('positionY'); 
         }
     }
-    
-    
+
+    //security_login
+    setInterval(() => {
+         if (localStorage.token) {
+
+            service_login.secure_login(localStorage.token)
+         }
+    },10000)
+
     service_search.type_search();
     service_search.categorie_search();
     
@@ -148,6 +155,7 @@ app.run(function($rootScope,service_search,service_regex,service_login,service_a
         localStorage.removeItem('token')
         setTimeout(() => {window.location.reload()},1500)
     }
+    
     $rootScope.show_panel = () => {
       $rootScope.show_panel_login = true
     };

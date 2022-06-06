@@ -1,4 +1,4 @@
-app.factory('service_news', function($http) {
+app.factory('service_news', function(services) {
     let service = {more_news: more_news};
     return service;
 
@@ -18,24 +18,17 @@ app.factory('service_news', function($http) {
             localStorage.setItem('limits',JSON.stringify(index));
 
         }
-
-
         var news_array= [];
-        
-        $http({
-            method: 'GET',
-            url: "https://gnews.io/api/v4/search?q="+index[1]+"&token=0385cf3c96b012a44d32a89154502a99",
-
-        }).success(function(data, status, headers, config) {
-          
+        services.get_out('https://gnews.io/api/v4/search?q='+index[1]+'&token=0385cf3c96b012a44d32a89154502a99')
+        .then(function(data) {
             for (i=0;i < index[0];i++) {
-            
                 news_array.push(data.articles[i]);
             }
 
-        }).error(function(data, status, headers, config) {
-           defered.reject(data);
+        }, function(error) {
+            console.log(error);
         });
+       
         return news_array;
     }
 });

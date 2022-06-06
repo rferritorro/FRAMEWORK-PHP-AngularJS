@@ -44,4 +44,8 @@
         <name>setnewpassword</name>
         <uri>set_new_password</uri>
     </function>
+    <function>
+     <name>secure_login</name>
+        <uri>secure_login</uri>
+    </function>
 </functions>

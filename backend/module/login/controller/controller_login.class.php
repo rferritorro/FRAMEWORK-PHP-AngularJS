@@ -20,7 +20,9 @@ class controller_login {
     function logger() {
       echo json_encode(common::load_model('login_model', 'get_log',[$_POST["user"],$_POST["password"]]));
     }
-
+    function secure_login() {
+      echo json_encode(middleware_auth::encode_jwt($_POST[""],1));
+    }
     function chargeuser() {
       echo json_encode(common::load_model('login_model', 'get_charge_user',$_POST["token"]));
     }
